@@ -13,7 +13,6 @@
 --surface:#0b1511;
 --surface2:#101f18;
 --mint:#91f5c9;
---mint2:#6de8b6;
 --white:#f7faf8;
 --muted:#93a29b;
 --border:rgba(255,255,255,.09);
@@ -36,8 +35,6 @@ width:92%;
 max-width:1250px;
 margin:auto;
 }
-
-/* HEADER */
 
 header{
 position:sticky;
@@ -81,8 +78,6 @@ border-radius:999px;
 font-weight:900;
 }
 
-/* FLOATING GLASS MENU */
-
 .bubble{
 position:fixed;
 right:18px;
@@ -125,8 +120,6 @@ font-size:13px;
 font-weight:800;
 box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
-
-/* CATALOGUE */
 
 .catalogue{
 padding:38px 0 15px;
@@ -187,8 +180,6 @@ font-weight:900;
 cursor:pointer;
 }
 
-/* CARDS */
-
 .cars{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -237,9 +228,7 @@ cursor:pointer;
 font-size:18px;
 }
 
-.heart.saved{
-color:var(--mint);
-}
+.heart.saved{color:var(--mint)}
 
 .info{padding:17px}
 
@@ -282,8 +271,6 @@ font-weight:900;
 cursor:pointer;
 }
 
-/* HERO */
-
 .hero{
 padding:48px 0 25px;
 }
@@ -321,9 +308,7 @@ letter-spacing:-4px;
 font-weight:950;
 }
 
-.hero h1 span{
-color:var(--mint);
-}
+.hero h1 span{color:var(--mint)}
 
 .hero p{
 position:relative;
@@ -361,8 +346,6 @@ background:rgba(255,255,255,.04);
 color:white;
 }
 
-/* FEATURES */
-
 .features{
 padding:40px 0 65px;
 }
@@ -397,8 +380,6 @@ font-size:14px;
 line-height:1.5;
 }
 
-/* SELL */
-
 .sell{
 padding-bottom:65px;
 }
@@ -416,8 +397,6 @@ max-width:700px;
 margin:10px 0 20px;
 line-height:1.6;
 }
-
-/* FOOTER */
 
 footer{
 border-top:1px solid var(--border);
@@ -440,6 +419,103 @@ text-align:center;
 background:var(--surface);
 border-radius:20px;
 color:var(--muted);
+}
+
+/* INSPECTION MODAL */
+
+.modal{
+position:fixed;
+inset:0;
+z-index:1000;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(14px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:18px;
+}
+
+.modalBox{
+width:100%;
+max-width:440px;
+background:#0b1511;
+border:1px solid rgba(145,245,201,.18);
+border-radius:27px;
+padding:25px;
+box-shadow:0 25px 80px rgba(0,0,0,.65);
+}
+
+.modalBox h2{
+font-size:30px;
+margin-bottom:8px;
+}
+
+.modalText{
+color:var(--muted);
+font-size:13px;
+line-height:1.5;
+margin-bottom:20px;
+}
+
+.formLabel{
+display:block;
+font-size:12px;
+font-weight:900;
+margin:13px 0 7px;
+}
+
+.formInput{
+width:100%;
+padding:13px;
+border-radius:13px;
+border:1px solid var(--border);
+background:#101f18;
+color:white;
+outline:none;
+}
+
+.modalActions{
+display:flex;
+gap:9px;
+margin-top:20px;
+}
+
+.confirm{
+flex:1;
+background:var(--mint);
+color:#04100a;
+border:0;
+padding:13px;
+border-radius:999px;
+font-weight:950;
+cursor:pointer;
+}
+
+.cancel{
+background:#101f18;
+color:white;
+border:1px solid var(--border);
+padding:13px 18px;
+border-radius:999px;
+font-weight:800;
+cursor:pointer;
+}
+
+.success{
+text-align:center;
+padding:15px 0 5px;
+}
+
+.successIcon{
+font-size:45px;
+color:var(--mint);
+margin-bottom:10px;
+}
+
+.success p{
+color:var(--muted);
+line-height:1.6;
+font-size:14px;
 }
 
 /* MOBILE */
@@ -468,34 +544,22 @@ padding:34px 25px;
 
 @media(max-width:560px){
 
-.container{
-width:94%;
-}
+.container{width:94%}
 
-.nav{
-height:65px;
-}
+.nav{height:65px}
 
-.logo{
-font-size:21px;
-}
+.logo{font-size:21px}
 
 .sellBtn{
 padding:10px 14px;
 font-size:12px;
 }
 
-.cars{
-grid-template-columns:1fr;
-}
+.cars{grid-template-columns:1fr}
 
-.filters{
-grid-template-columns:1fr;
-}
+.filters{grid-template-columns:1fr}
 
-.reset{
-height:47px;
-}
+.reset{height:47px}
 
 .hero{
 padding-top:30px;
@@ -511,16 +575,14 @@ font-size:48px;
 letter-spacing:-2.5px;
 }
 
-.hero p{
-font-size:15px;
-}
+.hero p{font-size:15px}
 
-.sectionTop{
-align-items:start;
-}
+.sectionTop{align-items:start}
 
-h2{
-font-size:29px;
+h2{font-size:29px}
+
+.modalBox{
+padding:21px;
 }
 
 }
@@ -548,13 +610,10 @@ CarHub <span>Africa</span>
 </header>
 
 
-<!-- FLOATING GLASS MENU -->
-
 <div class="bubbleMenu" id="bubbleMenu">
 
 <a class="bubbleItem" href="#cars">🚗 Browse cars</a>
 <a class="bubbleItem" href="#sell">＋ Sell a car</a>
-<a class="bubbleItem" href="#">♡ Saved cars</a>
 <a class="bubbleItem" href="#features">✦ Features</a>
 
 </div>
@@ -563,8 +622,6 @@ CarHub <span>Africa</span>
 
 
 <main>
-
-<!-- CATALOGUE FIRST -->
 
 <section class="catalogue" id="cars">
 
@@ -580,7 +637,6 @@ CarHub <span>Africa</span>
 <div class="count" id="count"></div>
 
 </div>
-
 
 <div class="filters">
 
@@ -618,8 +674,6 @@ placeholder="Search make, model or year"
 </section>
 
 
-<!-- INTRO -->
-
 <section class="hero">
 
 <div class="container">
@@ -641,13 +695,9 @@ car move with confidence.
 
 <div class="heroButtons">
 
-<a class="btn btnMint" href="#cars">
-Browse cars
-</a>
+<a class="btn btnMint" href="#cars">Browse cars</a>
 
-<a class="btn btnDark" href="#sell">
-Sell your car
-</a>
+<a class="btn btnDark" href="#sell">Sell your car</a>
 
 </div>
 
@@ -657,8 +707,6 @@ Sell your car
 
 </section>
 
-
-<!-- FEATURES -->
 
 <section class="features" id="features">
 
@@ -673,25 +721,19 @@ Sell your car
 <div class="feature">
 <div class="icon">🔎</div>
 <h3>Smart discovery</h3>
-<p>
-Search and filter vehicles quickly to find what you're looking for.
-</p>
+<p>Search and filter vehicles quickly to find what you're looking for.</p>
 </div>
 
 <div class="feature">
 <div class="icon">✓</div>
 <h3>Buy with confidence</h3>
-<p>
-Find vehicle information and connect directly with sellers.
-</p>
+<p>Find vehicle information and connect directly with sellers.</p>
 </div>
 
 <div class="feature">
 <div class="icon">＋</div>
 <h3>Sell your car</h3>
-<p>
-Create your listing and reach buyers through CarHub Africa.
-</p>
+<p>Create your listing and reach buyers through CarHub Africa.</p>
 </div>
 
 </div>
@@ -700,8 +742,6 @@ Create your listing and reach buyers through CarHub Africa.
 
 </section>
 
-
-<!-- SELL -->
 
 <section class="sell" id="sell">
 
@@ -715,8 +755,6 @@ Create your listing and reach buyers through CarHub Africa.
 
 <p>
 Create a professional vehicle listing and reach serious buyers.
-The full seller dashboard, inspection booking, AI listing tools
-and social publishing system will be connected here.
 </p>
 
 <button class="btn btnMint" onclick="startSelling()">
@@ -825,7 +863,6 @@ const type=document
 .getElementById("type")
 .value;
 
-
 const list=vehicles.filter(car=>{
 
 const text=(
@@ -842,10 +879,8 @@ return(
 
 });
 
-
 document.getElementById("count").textContent=
 list.length+" vehicles";
-
 
 document.getElementById("cars").innerHTML=
 
@@ -869,21 +904,15 @@ onclick="saveCar(${index})">
 
 <div class="info">
 
-<span class="tag">
-${car.type}
-</span>
+<span class="tag">${car.type}</span>
 
 <h3>
 ${car.year} ${car.make} ${car.model}
 </h3>
 
-<div class="price">
-${car.price}
-</div>
+<div class="price">${car.price}</div>
 
-<div class="spec">
-${car.spec}
-</div>
+<div class="spec">${car.spec}</div>
 
 <button
 class="view"
@@ -930,13 +959,13 @@ render();
 
 function viewCar(name){
 
-const car = vehicles.find(
-v => `${v.make} ${v.model}` === name
+const car=vehicles.find(
+v=>`${v.make} ${v.model}`===name
 );
 
-if(!car) return;
+if(!car)return;
 
-document.body.innerHTML = `
+document.body.innerHTML=`
 
 <div style="
 min-height:100vh;
@@ -946,10 +975,7 @@ font-family:Arial,Helvetica,sans-serif;
 padding:20px;
 ">
 
-<div style="
-max-width:900px;
-margin:auto;
-">
+<div style="max-width:900px;margin:auto">
 
 <button onclick="location.reload()" style="
 border:1px solid rgba(255,255,255,.1);
@@ -1023,38 +1049,22 @@ grid-template-columns:repeat(2,1fr);
 gap:10px;
 ">
 
-<div style="
-background:#101f18;
-padding:16px;
-border-radius:15px;
-">
+<div style="background:#101f18;padding:16px;border-radius:15px">
 <strong>Type</strong><br>
 <span style="color:#93a29b">${car.type}</span>
 </div>
 
-<div style="
-background:#101f18;
-padding:16px;
-border-radius:15px;
-">
+<div style="background:#101f18;padding:16px;border-radius:15px">
 <strong>Transmission</strong><br>
 <span style="color:#93a29b">Automatic</span>
 </div>
 
-<div style="
-background:#101f18;
-padding:16px;
-border-radius:15px;
-">
+<div style="background:#101f18;padding:16px;border-radius:15px">
 <strong>Fuel</strong><br>
 <span style="color:#93a29b">Petrol</span>
 </div>
 
-<div style="
-background:#101f18;
-padding:16px;
-border-radius:15px;
-">
+<div style="background:#101f18;padding:16px;border-radius:15px">
 <strong>Location</strong><br>
 <span style="color:#93a29b">Nigeria</span>
 </div>
@@ -1068,7 +1078,7 @@ flex-wrap:wrap;
 margin-top:25px;
 ">
 
-<button onclick="alert('Inspection booking will be connected next.')" style="
+<button onclick="openInspection()" style="
 background:#91f5c9;
 color:#04100a;
 border:0;
@@ -1104,10 +1114,154 @@ Contact seller
 }
 
 
+function openInspection(){
+
+const modal=document.createElement("div");
+
+modal.className="modal";
+
+modal.innerHTML=`
+
+<div class="modalBox">
+
+<div class="eyebrow">CARHUB INSPECTION</div>
+
+<h2>Book an inspection</h2>
+
+<p class="modalText">
+Choose a convenient date and time for your vehicle inspection.
+</p>
+
+<label class="formLabel">Inspection date</label>
+
+<input
+id="inspectionDate"
+class="formInput"
+type="date"
+min="${new Date().toISOString().split("T")[0]}"
+>
+
+<label class="formLabel">Inspection time</label>
+
+<select id="inspectionTime" class="formInput">
+
+<option value="">Select a time</option>
+<option>9:00 AM</option>
+<option>10:00 AM</option>
+<option>11:00 AM</option>
+<option>12:00 PM</option>
+<option>1:00 PM</option>
+<option>2:00 PM</option>
+<option>3:00 PM</option>
+<option>4:00 PM</option>
+
+</select>
+
+<label class="formLabel">Your name</label>
+
+<input
+id="buyerName"
+class="formInput"
+type="text"
+placeholder="Enter your name"
+>
+
+<label class="formLabel">Phone number</label>
+
+<input
+id="buyerPhone"
+class="formInput"
+type="tel"
+placeholder="Enter your phone number"
+>
+
+<div class="modalActions">
+
+<button class="confirm" onclick="confirmInspection()">
+Confirm booking
+</button>
+
+<button class="cancel" onclick="closeInspection()">
+Cancel
+</button>
+
+</div>
+
+</div>
+`;
+
+document.body.appendChild(modal);
+
+}
+
+
+function closeInspection(){
+
+const modal=document.querySelector(".modal");
+
+if(modal)modal.remove();
+
+}
+
+
+function confirmInspection(){
+
+const date=document.getElementById("inspectionDate").value;
+const time=document.getElementById("inspectionTime").value;
+const name=document.getElementById("buyerName").value.trim();
+const phone=document.getElementById("buyerPhone").value.trim();
+
+if(!date||!time||!name||!phone){
+
+alert("Please complete all inspection details.");
+
+return;
+
+}
+
+const modal=document.querySelector(".modal");
+
+modal.innerHTML=`
+
+<div class="modalBox">
+
+<div class="success">
+
+<div class="successIcon">✓</div>
+
+<div class="eyebrow">BOOKING RECEIVED</div>
+
+<h2>Inspection requested</h2>
+
+<p>
+Thank you, ${name}. Your inspection request has been recorded.
+</p>
+
+<p style="margin-top:12px">
+<strong>Date:</strong> ${date}<br>
+<strong>Time:</strong> ${time}<br>
+<strong>Phone:</strong> ${phone}
+</p>
+
+<button
+class="confirm"
+style="margin-top:20px;width:100%"
+onclick="closeInspection()">
+Done
+</button>
+
+</div>
+
+</div>
+`;
+
+}
+
+
 function startSelling(){
 
 alert(
-"The full seller listing system is coming next."
+"The seller listing system will be connected next."
 );
 
 }
