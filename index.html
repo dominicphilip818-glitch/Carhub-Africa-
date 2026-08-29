@@ -7,238 +7,522 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 :root{
-  --bg:#06100c;
-  --card:#0c1a15;
-  --card2:#10231b;
-  --mint:#8df0c6;
-  --text:#f4f7f5;
-  --muted:#98a8a1;
-  --line:rgba(141,240,198,.14);
+--bg:#050b08;
+--surface:#0b1511;
+--surface2:#101f18;
+--mint:#91f5c9;
+--mint2:#6de8b6;
+--white:#f7faf8;
+--muted:#93a29b;
+--border:rgba(255,255,255,.09);
 }
-html{scroll-behavior:smooth}
+
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+font-family:Arial,Helvetica,sans-serif;
+background:
+radial-gradient(circle at 80% 0%,rgba(80,220,160,.10),transparent 30%),
+var(--bg);
+color:var(--white);
+min-height:100vh;
 }
+
 a{text-decoration:none;color:inherit}
 button,input,select{font:inherit}
-.container{width:92%;max-width:1200px;margin:auto}
+
+.container{
+width:92%;
+max-width:1250px;
+margin:auto;
+}
+
+/* HEADER */
 
 header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(6,16,12,.94);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--line);
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(5,11,8,.78);
+backdrop-filter:blur(22px);
+border-bottom:1px solid var(--border);
 }
+
 .nav{
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
+height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
-.logo{font-size:24px;font-weight:900}
+
+.logo{
+font-size:24px;
+font-weight:950;
+letter-spacing:-1.2px;
+}
+
 .logo span{color:var(--mint)}
-.navlinks{display:flex;gap:22px;color:#c8d1cd;font-size:14px}
+
+.navlinks{
+display:flex;
+gap:28px;
+color:#c8d2cd;
+font-size:14px;
+font-weight:700;
+}
+
 .navlinks a:hover{color:var(--mint)}
-.actions{display:flex;gap:8px}
 
-.btn{
-  border:0;
-  border-radius:999px;
-  padding:11px 17px;
-  font-weight:800;
-  cursor:pointer;
+.sellBtn{
+background:var(--mint);
+color:#04100a;
+padding:11px 18px;
+border-radius:999px;
+font-weight:900;
 }
-.mint{background:var(--mint);color:#06110c}
-.outline{background:transparent;color:white;border:1px solid var(--line)}
 
-.catalogue{padding:30px 0 15px}
-.topline{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin-bottom:18px;
+/* FLOATING GLASS MENU */
+
+.bubble{
+position:fixed;
+right:18px;
+bottom:22px;
+z-index:200;
+width:58px;
+height:58px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:23px;
+cursor:pointer;
+background:rgba(145,245,201,.15);
+border:1px solid rgba(145,245,201,.38);
+box-shadow:0 12px 35px rgba(0,0,0,.45);
+backdrop-filter:blur(20px);
+color:var(--mint);
 }
+
+.bubbleMenu{
+position:fixed;
+right:18px;
+bottom:91px;
+z-index:199;
+display:none;
+flex-direction:column;
+gap:9px;
+}
+
+.bubbleMenu.open{display:flex}
+
+.bubbleItem{
+background:rgba(12,25,19,.88);
+border:1px solid var(--border);
+backdrop-filter:blur(20px);
+padding:11px 15px;
+border-radius:999px;
+font-size:13px;
+font-weight:800;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* CATALOGUE */
+
+.catalogue{
+padding:38px 0 15px;
+}
+
+.sectionTop{
+display:flex;
+justify-content:space-between;
+align-items:end;
+margin-bottom:20px;
+}
+
 .eyebrow{
-  color:var(--mint);
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1.5px;
-  margin-bottom:6px;
+color:var(--mint);
+font-size:11px;
+font-weight:950;
+letter-spacing:2px;
+margin-bottom:7px;
 }
-h2{font-size:31px;letter-spacing:-1px}
-.muted{color:var(--muted)}
+
+h2{
+font-size:clamp(28px,5vw,40px);
+letter-spacing:-1.8px;
+font-weight:950;
+}
+
+.count{
+color:var(--muted);
+font-size:13px;
+}
 
 .filters{
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr auto;
-  gap:9px;
-  margin-bottom:20px;
+display:grid;
+grid-template-columns:1.6fr 1fr 1fr auto;
+gap:9px;
+margin-bottom:20px;
 }
+
 .field{
-  width:100%;
-  padding:13px 14px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:white;
-  outline:none;
+width:100%;
+padding:14px;
+border-radius:15px;
+border:1px solid var(--border);
+background:var(--surface);
+color:white;
+outline:none;
 }
+
 .field::placeholder{color:#718078}
 
+.reset{
+border:0;
+border-radius:15px;
+padding:0 18px;
+background:var(--mint);
+color:#04100a;
+font-weight:900;
+cursor:pointer;
+}
+
+/* CARDS */
+
 .cars{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:17px;
 }
+
 .car{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:21px;
-  overflow:hidden;
+background:linear-gradient(145deg,#0d1b15,#09110e);
+border:1px solid var(--border);
+border-radius:24px;
+overflow:hidden;
+transition:.25s;
 }
+
+.car:hover{
+transform:translateY(-3px);
+border-color:rgba(145,245,201,.25);
+}
+
 .photo{
-  height:210px;
-  background:
-    radial-gradient(circle at 50% 30%,rgba(141,240,198,.13),transparent 45%),
-    linear-gradient(135deg,#183127,#09120e);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#7b8c84;
-  font-weight:900;
-  text-align:center;
-  position:relative;
+height:220px;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:
+radial-gradient(circle at 50% 40%,rgba(145,245,201,.16),transparent 42%),
+linear-gradient(135deg,#172c23,#08100d);
+color:#8da097;
+font-size:14px;
+font-weight:900;
 }
+
 .heart{
-  position:absolute;
-  right:12px;
-  top:12px;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  border:1px solid var(--line);
-  background:rgba(6,16,12,.8);
-  color:white;
-  cursor:pointer;
-  font-size:18px;
+position:absolute;
+right:13px;
+top:13px;
+width:40px;
+height:40px;
+border-radius:50%;
+background:rgba(0,0,0,.35);
+border:1px solid rgba(255,255,255,.1);
+color:white;
+cursor:pointer;
+font-size:18px;
 }
-.heart.saved{color:var(--mint)}
-.info{padding:16px}
+
+.heart.saved{
+color:var(--mint);
+}
+
+.info{padding:17px}
+
 .tag{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:999px;
-  background:rgba(141,240,198,.1);
-  color:var(--mint);
-  font-size:10px;
-  font-weight:900;
+display:inline-block;
+padding:5px 9px;
+border-radius:999px;
+background:rgba(145,245,201,.10);
+color:var(--mint);
+font-size:10px;
+font-weight:900;
 }
-.car h3{font-size:18px;margin-top:9px}
-.price{font-size:21px;font-weight:900;margin:7px 0}
-.spec{font-size:12px;color:var(--muted)}
+
+.car h3{
+font-size:19px;
+margin-top:10px;
+font-weight:900;
+}
+
+.price{
+font-size:22px;
+font-weight:950;
+margin:8px 0;
+}
+
+.spec{
+color:var(--muted);
+font-size:12px;
+}
+
 .view{
-  width:100%;
-  margin-top:14px;
-  padding:11px;
-  border-radius:12px;
-  background:var(--card2);
-  color:white;
-  border:1px solid var(--line);
-  font-weight:800;
+width:100%;
+margin-top:15px;
+padding:12px;
+border-radius:13px;
+background:var(--surface2);
+border:1px solid var(--border);
+color:white;
+font-weight:900;
+cursor:pointer;
 }
 
-.hero{padding:50px 0}
+/* HERO */
+
+.hero{
+padding:48px 0 25px;
+}
+
 .heroBox{
-  border:1px solid var(--line);
-  border-radius:29px;
-  padding:48px;
-  background:
-    radial-gradient(circle at 85% 20%,rgba(141,240,198,.13),transparent 35%),
-    var(--card);
+position:relative;
+overflow:hidden;
+padding:52px;
+border-radius:31px;
+border:1px solid var(--border);
+background:
+radial-gradient(circle at 85% 25%,rgba(145,245,201,.18),transparent 30%),
+linear-gradient(135deg,#0d1c15,#07100c);
 }
+
+.heroBox:after{
+content:"";
+position:absolute;
+width:280px;
+height:280px;
+right:-100px;
+bottom:-150px;
+border-radius:50%;
+background:rgba(145,245,201,.08);
+filter:blur(10px);
+}
+
 .hero h1{
-  max-width:780px;
-  font-size:clamp(40px,7vw,72px);
-  line-height:.98;
-  letter-spacing:-3px;
+position:relative;
+z-index:2;
+max-width:850px;
+font-size:clamp(43px,8vw,82px);
+line-height:.93;
+letter-spacing:-4px;
+font-weight:950;
 }
+
+.hero h1 span{
+color:var(--mint);
+}
+
 .hero p{
-  max-width:650px;
-  color:var(--muted);
-  font-size:17px;
-  margin:19px 0 24px;
+position:relative;
+z-index:2;
+max-width:650px;
+color:var(--muted);
+font-size:17px;
+line-height:1.6;
+margin:22px 0 27px;
 }
-.herobuttons{display:flex;gap:10px;flex-wrap:wrap}
 
-.features{padding:10px 0 55px}
-.featuregrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
-  margin-top:19px;
+.heroButtons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+position:relative;
+z-index:2;
 }
+
+.btn{
+padding:13px 19px;
+border-radius:999px;
+font-weight:900;
+border:1px solid var(--border);
+cursor:pointer;
+}
+
+.btnMint{
+background:var(--mint);
+color:#04100a;
+}
+
+.btnDark{
+background:rgba(255,255,255,.04);
+color:white;
+}
+
+/* FEATURES */
+
+.features{
+padding:40px 0 65px;
+}
+
+.featureGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:17px;
+margin-top:20px;
+}
+
 .feature{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:21px;
-  padding:24px;
+background:var(--surface);
+border:1px solid var(--border);
+border-radius:22px;
+padding:25px;
 }
-.icon{font-size:27px;margin-bottom:10px}
-.feature h3{margin-bottom:7px}
 
-.sell{padding-bottom:60px}
-.sellbox{
-  background:var(--card2);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:30px;
+.icon{
+font-size:27px;
+margin-bottom:13px;
 }
-.sellbox p{
-  color:var(--muted);
-  max-width:700px;
-  margin:9px 0 18px;
+
+.feature h3{
+font-size:18px;
+margin-bottom:8px;
 }
+
+.feature p{
+color:var(--muted);
+font-size:14px;
+line-height:1.5;
+}
+
+/* SELL */
+
+.sell{
+padding-bottom:65px;
+}
+
+.sellBox{
+padding:32px;
+border-radius:25px;
+background:var(--surface2);
+border:1px solid var(--border);
+}
+
+.sellBox p{
+color:var(--muted);
+max-width:700px;
+margin:10px 0 20px;
+line-height:1.6;
+}
+
+/* FOOTER */
 
 footer{
-  border-top:1px solid var(--line);
-  padding:28px 0;
-  color:var(--muted);
+border-top:1px solid var(--border);
+padding:30px 0;
+color:var(--muted);
+font-size:13px;
 }
-.footerrow{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  flex-wrap:wrap;
+
+.footerRow{
+display:flex;
+justify-content:space-between;
+gap:15px;
+flex-wrap:wrap;
 }
 
 .empty{
-  grid-column:1/-1;
-  padding:45px;
-  text-align:center;
-  color:var(--muted);
-  background:var(--card);
-  border-radius:20px;
+grid-column:1/-1;
+padding:45px;
+text-align:center;
+background:var(--surface);
+border-radius:20px;
+color:var(--muted);
 }
 
+/* MOBILE */
+
 @media(max-width:850px){
-  .navlinks{display:none}
-  .cars{grid-template-columns:repeat(2,1fr)}
-  .filters{grid-template-columns:1fr 1fr}
-  .featuregrid{grid-template-columns:1fr}
+
+.navlinks{display:none}
+
+.cars{
+grid-template-columns:repeat(2,1fr);
 }
+
+.filters{
+grid-template-columns:1fr 1fr;
+}
+
+.featureGrid{
+grid-template-columns:1fr;
+}
+
+.heroBox{
+padding:34px 25px;
+}
+
+}
+
 @media(max-width:560px){
-  .actions .outline{display:none}
-  .logo{font-size:21px}
-  .cars{grid-template-columns:1fr}
-  .filters{grid-template-columns:1fr}
-  .heroBox{padding:27px}
-  .hero h1{letter-spacing:-2px}
+
+.container{
+width:94%;
+}
+
+.nav{
+height:65px;
+}
+
+.logo{
+font-size:21px;
+}
+
+.sellBtn{
+padding:10px 14px;
+font-size:12px;
+}
+
+.cars{
+grid-template-columns:1fr;
+}
+
+.filters{
+grid-template-columns:1fr;
+}
+
+.reset{
+height:47px;
+}
+
+.hero{
+padding-top:30px;
+}
+
+.heroBox{
+padding:31px 22px;
+border-radius:25px;
+}
+
+.hero h1{
+font-size:48px;
+letter-spacing:-2.5px;
+}
+
+.hero p{
+font-size:15px;
+}
+
+.sectionTop{
+align-items:start;
+}
+
+h2{
+font-size:29px;
+}
+
 }
 </style>
 </head>
@@ -247,36 +531,64 @@ footer{
 
 <header>
 <div class="container nav">
-<a href="#" class="logo">CarHub <span>Africa</span></a>
+
+<a class="logo" href="#">
+CarHub <span>Africa</span>
+</a>
 
 <nav class="navlinks">
 <a href="#cars">Cars</a>
-<a href="#how">How it works</a>
+<a href="#features">Features</a>
 <a href="#sell">Sell</a>
 </nav>
 
-<div class="actions">
-<button class="btn outline" onclick="alert('Sign in will be connected next.')">Sign in</button>
-<a href="#sell" class="btn mint">Sell a car</a>
-</div>
+<a class="sellBtn" href="#sell">Sell a car</a>
+
 </div>
 </header>
 
+
+<!-- FLOATING GLASS MENU -->
+
+<div class="bubbleMenu" id="bubbleMenu">
+
+<a class="bubbleItem" href="#cars">🚗 Browse cars</a>
+<a class="bubbleItem" href="#sell">＋ Sell a car</a>
+<a class="bubbleItem" href="#">♡ Saved cars</a>
+<a class="bubbleItem" href="#features">✦ Features</a>
+
+</div>
+
+<button class="bubble" onclick="toggleBubble()">☰</button>
+
+
 <main>
 
+<!-- CATALOGUE FIRST -->
+
 <section class="catalogue" id="cars">
+
 <div class="container">
 
-<div class="topline">
+<div class="sectionTop">
+
 <div>
 <div class="eyebrow">CAR MARKETPLACE</div>
 <h2>Find your next car</h2>
 </div>
-<div class="muted" id="count"></div>
+
+<div class="count" id="count"></div>
+
 </div>
 
+
 <div class="filters">
-<input id="search" class="field" placeholder="Search make, model or year">
+
+<input
+id="search"
+class="field"
+placeholder="Search make, model or year"
+>
 
 <select id="make" class="field">
 <option value="">All makes</option>
@@ -295,98 +607,150 @@ footer{
 <option>Pickup</option>
 </select>
 
-<button class="btn mint" onclick="resetFilters()">Reset</button>
+<button class="reset" onclick="resetFilters()">Reset</button>
+
 </div>
 
 <div class="cars" id="cars"></div>
 
 </div>
+
 </section>
 
+
+<!-- INTRO -->
+
 <section class="hero">
+
 <div class="container">
+
 <div class="heroBox">
 
 <div class="eyebrow">WELCOME TO CARHUB AFRICA</div>
 
-<h1>Buy and sell cars with confidence.</h1>
+<h1>
+Buy. Sell.
+<span>Drive.</span>
+</h1>
 
 <p>
-A modern African car marketplace built to help buyers
-discover vehicles and sellers reach serious customers.
+Africa's modern marketplace for buying and selling cars.
+Discover vehicles, connect with sellers and make your next
+car move with confidence.
 </p>
 
-<div class="herobuttons">
-<a href="#cars" class="btn mint">Browse cars</a>
-<a href="#sell" class="btn outline">Sell your car</a>
+<div class="heroButtons">
+
+<a class="btn btnMint" href="#cars">
+Browse cars
+</a>
+
+<a class="btn btnDark" href="#sell">
+Sell your car
+</a>
+
 </div>
 
 </div>
+
 </div>
+
 </section>
 
-<section class="features" id="how">
+
+<!-- FEATURES -->
+
+<section class="features" id="features">
+
 <div class="container">
 
-<div class="eyebrow">CARHUB FEATURES</div>
+<div class="eyebrow">CARHUB AFRICA</div>
+
 <h2>Everything in one place</h2>
 
-<div class="featuregrid">
+<div class="featureGrid">
 
 <div class="feature">
-<div class="icon">🚗</div>
-<h3>Browse cars</h3>
-<p class="muted">Find vehicles by make, model, type and price.</p>
+<div class="icon">🔎</div>
+<h3>Smart discovery</h3>
+<p>
+Search and filter vehicles quickly to find what you're looking for.
+</p>
 </div>
 
 <div class="feature">
 <div class="icon">✓</div>
 <h3>Buy with confidence</h3>
-<p class="muted">Connect with sellers and arrange the next step.</p>
+<p>
+Find vehicle information and connect directly with sellers.
+</p>
 </div>
 
 <div class="feature">
 <div class="icon">＋</div>
 <h3>Sell your car</h3>
-<p class="muted">Create a listing and reach buyers on CarHub.</p>
+<p>
+Create your listing and reach buyers through CarHub Africa.
+</p>
 </div>
 
 </div>
+
 </div>
+
 </section>
 
+
+<!-- SELL -->
+
 <section class="sell" id="sell">
+
 <div class="container">
-<div class="sellbox">
+
+<div class="sellBox">
 
 <div class="eyebrow">SELL ON CARHUB</div>
 
 <h2>Ready to sell your car?</h2>
 
 <p>
-Create a vehicle listing and reach serious buyers.
-Our seller dashboard, inspection scheduling, AI listing
-tools and social publishing will be connected here.
+Create a professional vehicle listing and reach serious buyers.
+The full seller dashboard, inspection booking, AI listing tools
+and social publishing system will be connected here.
 </p>
 
-<button class="btn mint" onclick="startSelling()">Start a listing</button>
+<button class="btn btnMint" onclick="startSelling()">
+Start a listing
+</button>
 
 </div>
+
 </div>
+
 </section>
 
 </main>
 
+
 <footer>
-<div class="container footerrow">
-<strong>CarHub <span style="color:#8df0c6">Africa</span></strong>
+
+<div class="container footerRow">
+
+<strong>
+CarHub <span style="color:#91f5c9">Africa</span>
+</strong>
+
 <span>© 2026 CarHub Africa</span>
+
 </div>
+
 </footer>
+
 
 <script>
 
-const vehicles = [
+const vehicles=[
+
 {
 make:"Toyota",
 model:"Land Cruiser",
@@ -395,6 +759,7 @@ price:"₦78,000,000",
 type:"SUV",
 spec:"Automatic • Petrol"
 },
+
 {
 make:"Lexus",
 model:"RX 350",
@@ -403,6 +768,7 @@ price:"₦52,000,000",
 type:"SUV",
 spec:"Automatic • Petrol"
 },
+
 {
 make:"Mercedes-Benz",
 model:"C300",
@@ -411,6 +777,7 @@ price:"₦38,500,000",
 type:"Sedan",
 spec:"Automatic • Petrol"
 },
+
 {
 make:"Honda",
 model:"CR-V",
@@ -419,6 +786,7 @@ price:"₦31,000,000",
 type:"SUV",
 spec:"Automatic • Petrol"
 },
+
 {
 make:"BMW",
 model:"X5",
@@ -427,6 +795,7 @@ price:"₦60,000,000",
 type:"SUV",
 spec:"Automatic • Petrol"
 },
+
 {
 make:"Hyundai",
 model:"Tucson",
@@ -435,9 +804,11 @@ price:"₦29,500,000",
 type:"SUV",
 spec:"Automatic • Petrol"
 }
+
 ];
 
-let savedCars=[];
+let saved=[];
+
 
 function render(){
 
@@ -454,29 +825,42 @@ const type=document
 .getElementById("type")
 .value;
 
+
 const list=vehicles.filter(car=>{
 
-const text=(car.make+" "+car.model+" "+car.year).toLowerCase();
+const text=(
+car.make+" "+
+car.model+" "+
+car.year
+).toLowerCase();
 
-return (!search||text.includes(search))
-&&(!make||car.make===make)
-&&(!type||car.type===type);
+return(
+(!search||text.includes(search))&&
+(!make||car.make===make)&&
+(!type||car.type===type)
+);
 
 });
 
-document.getElementById("count").textContent=
-list.length+" vehicle"+(list.length===1?"":"s");
 
-document.getElementById("cars").innerHTML=list.length
+document.getElementById("count").textContent=
+list.length+" vehicles";
+
+
+document.getElementById("cars").innerHTML=
+
+list.length
+
 ?list.map((car,index)=>`
 
 <article class="car">
 
 <div class="photo">
 
-${car.make} ${car.model}
+${car.make}<br>${car.model}
 
-<button class="heart ${savedCars.includes(index)?"saved":""}"
+<button
+class="heart ${saved.includes(index)?"saved":""}"
 onclick="saveCar(${index})">
 ♥
 </button>
@@ -485,15 +869,24 @@ onclick="saveCar(${index})">
 
 <div class="info">
 
-<span class="tag">${car.type}</span>
+<span class="tag">
+${car.type}
+</span>
 
-<h3>${car.year} ${car.make} ${car.model}</h3>
+<h3>
+${car.year} ${car.make} ${car.model}
+</h3>
 
-<div class="price">${car.price}</div>
+<div class="price">
+${car.price}
+</div>
 
-<div class="spec">${car.spec}</div>
+<div class="spec">
+${car.spec}
+</div>
 
-<button class="view"
+<button
+class="view"
 onclick="viewCar('${car.make} ${car.model}')">
 View vehicle
 </button>
@@ -503,22 +896,26 @@ View vehicle
 </article>
 
 `).join("")
+
 :
+
 '<div class="empty">No vehicles found. Try another search.</div>';
 
 }
 
+
 function saveCar(index){
 
-if(savedCars.includes(index)){
-savedCars=savedCars.filter(i=>i!==index);
+if(saved.includes(index)){
+saved=saved.filter(i=>i!==index);
 }else{
-savedCars.push(index);
+saved.push(index);
 }
 
 render();
 
 }
+
 
 function resetFilters(){
 
@@ -530,25 +927,46 @@ render();
 
 }
 
+
 function viewCar(name){
 
-alert(name+" vehicle page will be connected next.");
+alert(
+name+
+" details will be connected to the vehicle page next."
+);
 
 }
+
 
 function startSelling(){
 
-alert("The seller listing system will be connected next.");
+alert(
+"The full seller listing system is coming next."
+);
 
 }
 
-document.getElementById("search")
+
+function toggleBubble(){
+
+document
+.getElementById("bubbleMenu")
+.classList
+.toggle("open");
+
+}
+
+
+document
+.getElementById("search")
 .addEventListener("input",render);
 
-document.getElementById("make")
+document
+.getElementById("make")
 .addEventListener("change",render);
 
-document.getElementById("type")
+document
+.getElementById("type")
 .addEventListener("change",render);
 
 render();
