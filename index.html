@@ -76,6 +76,7 @@ color:#04100a;
 padding:11px 18px;
 border-radius:999px;
 font-weight:900;
+border:0;
 cursor:pointer;
 }
 
@@ -112,7 +113,7 @@ gap:9px;
 .bubbleMenu.open{display:flex}
 
 .bubbleItem{
-background:rgba(12,25,19,.92);
+background:rgba(12,25,19,.94);
 border:1px solid var(--border);
 backdrop-filter:blur(20px);
 padding:11px 15px;
@@ -245,9 +246,13 @@ cursor:pointer;
 font-size:18px;
 }
 
-.heart.saved{color:var(--mint)}
+.heart.saved{
+color:var(--mint);
+}
 
-.info{padding:17px}
+.info{
+padding:17px;
+}
 
 .tag{
 display:inline-block;
@@ -419,14 +424,29 @@ flex-wrap:wrap;
 
 .empty{
 grid-column:1/-1;
-padding:45px;
+padding:55px 25px;
 text-align:center;
 background:var(--surface);
 border-radius:20px;
 color:var(--muted);
 }
 
-/* MODALS */
+.emptyIcon{
+font-size:42px;
+margin-bottom:12px;
+}
+
+.empty h3{
+color:white;
+font-size:21px;
+margin-bottom:7px;
+}
+
+.empty button{
+margin-top:18px;
+}
+
+/* MODAL */
 
 .modal{
 position:fixed;
@@ -576,22 +596,34 @@ padding:34px 25px;
 
 @media(max-width:560px){
 
-.container{width:94%}
+.container{
+width:94%;
+}
 
-.nav{height:65px}
+.nav{
+height:65px;
+}
 
-.logo{font-size:21px}
+.logo{
+font-size:21px;
+}
 
 .sellBtn{
 padding:10px 14px;
 font-size:12px;
 }
 
-.cars{grid-template-columns:1fr}
+.cars{
+grid-template-columns:1fr;
+}
 
-.filters{grid-template-columns:1fr}
+.filters{
+grid-template-columns:1fr;
+}
 
-.reset{height:47px}
+.reset{
+height:47px;
+}
 
 .hero{
 padding-top:30px;
@@ -607,11 +639,17 @@ font-size:48px;
 letter-spacing:-2.5px;
 }
 
-.hero p{font-size:15px}
+.hero p{
+font-size:15px;
+}
 
-.sectionTop{align-items:start}
+.sectionTop{
+align-items:start;
+}
 
-h2{font-size:29px}
+h2{
+font-size:29px;
+}
 
 .modalBox{
 padding:21px;
@@ -626,7 +664,7 @@ padding:21px;
 <header>
 <div class="container nav">
 
-<a class="logo" href="#">
+<a class="logo" href="#" onclick="showHome();return false">
 CarHub <span>Africa</span>
 </a>
 
@@ -636,24 +674,42 @@ CarHub <span>Africa</span>
 <a href="#sell">Sell</a>
 </nav>
 
-<button class="sellBtn" onclick="startSelling()">Sell a car</button>
+<button class="sellBtn" onclick="startSelling()">
+Sell a car
+</button>
 
 </div>
 </header>
 
 
+<!-- GLASS MENU -->
+
 <div class="bubbleMenu" id="bubbleMenu">
 
-<a class="bubbleItem" href="#cars">🚗 Browse cars</a>
-<a class="bubbleItem" href="#sell" onclick="startSelling();return false">＋ Sell a car</a>
-<a class="bubbleItem" href="#features">✦ Features</a>
+<a class="bubbleItem" href="#cars" onclick="closeBubble()">
+🚗 Browse cars
+</a>
+
+<button class="bubbleItem" onclick="startSelling();closeBubble()">
+＋ Sell a car
+</button>
+
+<button class="bubbleItem" onclick="showSaved();closeBubble()">
+♡ Saved cars
+</button>
+
+<a class="bubbleItem" href="#features" onclick="closeBubble()">
+✦ Features
+</a>
 
 </div>
 
 <button class="bubble" onclick="toggleBubble()">☰</button>
 
 
-<main>
+<main id="mainContent">
+
+<!-- CATALOGUE -->
 
 <section class="catalogue" id="cars">
 
@@ -707,6 +763,8 @@ placeholder="Search make, model or year"
 </section>
 
 
+<!-- HERO -->
+
 <section class="hero">
 
 <div class="container">
@@ -728,7 +786,9 @@ car move with confidence.
 
 <div class="heroButtons">
 
-<a class="btn btnMint" href="#cars">Browse cars</a>
+<a class="btn btnMint" href="#cars">
+Browse cars
+</a>
 
 <button class="btn btnDark" onclick="startSelling()">
 Sell your car
@@ -743,6 +803,8 @@ Sell your car
 </section>
 
 
+<!-- FEATURES -->
+
 <section class="features" id="features">
 
 <div class="container">
@@ -756,19 +818,25 @@ Sell your car
 <div class="feature">
 <div class="icon">🔎</div>
 <h3>Smart discovery</h3>
-<p>Search and filter vehicles quickly to find what you're looking for.</p>
+<p>
+Search and filter vehicles quickly to find what you're looking for.
+</p>
 </div>
 
 <div class="feature">
 <div class="icon">✓</div>
 <h3>Buy with confidence</h3>
-<p>Find vehicle information and connect directly with sellers.</p>
+<p>
+Find vehicle information and connect directly with sellers.
+</p>
 </div>
 
 <div class="feature">
 <div class="icon">＋</div>
 <h3>Sell your car</h3>
-<p>Create your listing and reach buyers through CarHub Africa.</p>
+<p>
+Create your listing and reach buyers through CarHub Africa.
+</p>
 </div>
 
 </div>
@@ -777,6 +845,8 @@ Sell your car
 
 </section>
 
+
+<!-- SELL -->
 
 <section class="sell" id="sell">
 
@@ -993,7 +1063,7 @@ View vehicle
 
 :
 
-'<div class="empty">No vehicles found. Try another search.</div>';
+'<div class="empty"><div class="emptyIcon">🚗</div><h3>No vehicles found</h3><p>Try another search or filter.</p></div>';
 
 }
 
@@ -1012,6 +1082,122 @@ JSON.stringify(saved)
 );
 
 render();
+
+}
+
+
+function showSaved(){
+
+const savedVehicles=vehicles.filter(
+car=>saved.includes(car.id)
+);
+
+document.getElementById("mainContent").innerHTML=`
+
+<section class="catalogue">
+
+<div class="container">
+
+<div class="sectionTop">
+
+<div>
+<div class="eyebrow">YOUR GARAGE</div>
+<h2>Saved cars</h2>
+</div>
+
+<div class="count">
+${savedVehicles.length} saved
+</div>
+
+</div>
+
+${
+savedVehicles.length
+
+?
+
+`<div class="cars">
+
+${savedVehicles.map(car=>`
+
+<article class="car">
+
+<div class="photo">
+
+${car.image
+?`<img src="${car.image}" alt="${car.make} ${car.model}">`
+:`<div class="photoLabel">${car.make}<br>${car.model}</div>`
+}
+
+<button
+class="heart saved"
+onclick="saveCar('${car.id}');showSaved()">
+♥
+</button>
+
+</div>
+
+<div class="info">
+
+<span class="tag">${car.type}</span>
+
+<h3>
+${car.year} ${car.make} ${car.model}
+</h3>
+
+<div class="price">${car.price}</div>
+
+<div class="spec">${car.spec}</div>
+
+<button
+class="view"
+onclick="viewCar('${car.id}')">
+View vehicle
+</button>
+
+</div>
+
+</article>
+
+`).join("")}
+
+</div>`
+
+:
+
+`<div class="empty">
+
+<div class="emptyIcon">♡</div>
+
+<h3>No saved cars yet</h3>
+
+<p>
+Tap the heart on any vehicle you like and it will appear here.
+</p>
+
+<button
+class="btn btnMint"
+onclick="showHome()">
+Browse cars
+</button>
+
+</div>`
+
+}
+
+</div>
+
+</section>
+`;
+
+window.scrollTo(0,0);
+
+}
+
+
+function showHome(){
+
+location.reload();
 
 }
 
@@ -1521,7 +1707,6 @@ image:selectedCarImage
 
 };
 
-
 userVehicles.push(newVehicle);
 
 localStorage.setItem(
@@ -1555,7 +1740,7 @@ Your ${year} ${make} ${model} has been added to the CarHub Africa catalogue.
 <button
 class="confirm"
 style="margin-top:20px;width:100%"
-onclick="closeSelling();document.getElementById('cars').scrollIntoView({behavior:'smooth'});render();">
+onclick="closeSelling();location.reload();">
 View my listing
 </button>
 
@@ -1563,8 +1748,6 @@ View my listing
 
 </div>
 `;
-
-render();
 
 }
 
@@ -1575,6 +1758,16 @@ document
 .getElementById("bubbleMenu")
 .classList
 .toggle("open");
+
+}
+
+
+function closeBubble(){
+
+document
+.getElementById("bubbleMenu")
+.classList
+.remove("open");
 
 }
 
