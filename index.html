@@ -3,44 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#030705">
-<title>CarHub Africa</title>
+<meta name="theme-color" content="#07140f">
+<title>CarHub Africa — Buy. Sell. Drive.</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
---bg:#030705;
---glass:rgba(255,255,255,.065);
---glass2:rgba(255,255,255,.035);
+--bg:#07110d;
+--bg2:#0b1913;
+--glass:rgba(255,255,255,.075);
+--glass2:rgba(255,255,255,.045);
 --mint:#91f5c9;
---mint2:#64e5ae;
+--mint2:#55ddb0;
 --gold:#e8b94e;
 --gold2:#ffd978;
 --white:#f7faf8;
---muted:#87958e;
---line:rgba(255,255,255,.09);
+--muted:#91a098;
+--line:rgba(255,255,255,.11);
 }
 
 html{scroll-behavior:smooth}
 
 body{
 font-family:Arial,Helvetica,sans-serif;
-background:
-radial-gradient(circle at 85% 0%,rgba(145,245,201,.13),transparent 28%),
-radial-gradient(circle at 5% 70%,rgba(232,185,78,.05),transparent 30%),
-var(--bg);
 color:var(--white);
 min-height:100vh;
+overflow-x:hidden;
+background:
+radial-gradient(circle at 80% 0%,rgba(145,245,201,.18),transparent 27%),
+radial-gradient(circle at 0% 45%,rgba(232,185,78,.08),transparent 30%),
+linear-gradient(135deg,#07110d,#0b1812 45%,#050b08);
+}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.025),transparent 20%),
+radial-gradient(circle at 80% 70%,rgba(145,245,201,.025),transparent 25%);
+z-index:-1;
 }
 
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
+.container{width:min(94%,1240px);margin:auto}
 
-.container{
-width:min(94%,1240px);
-margin:auto;
+/* GLASS EFFECT */
+
+.glass{
+background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+border:1px solid rgba(255,255,255,.12);
+box-shadow:
+0 25px 80px rgba(0,0,0,.32),
+inset 0 1px 0 rgba(255,255,255,.14);
+backdrop-filter:blur(28px);
+-webkit-backdrop-filter:blur(28px);
 }
 
 /* HEADER */
@@ -49,7 +70,7 @@ header{
 position:sticky;
 top:0;
 z-index:100;
-background:rgba(3,7,5,.68);
+background:rgba(5,13,9,.70);
 border-bottom:1px solid var(--line);
 backdrop-filter:blur(30px);
 -webkit-backdrop-filter:blur(30px);
@@ -70,25 +91,24 @@ gap:10px;
 }
 
 .logoMap{
-width:43px;
-height:43px;
-position:relative;
+width:45px;
+height:45px;
 display:flex;
 align-items:center;
 justify-content:center;
-border-radius:14px;
+border-radius:15px;
 background:
-linear-gradient(145deg,rgba(232,185,78,.18),rgba(255,255,255,.04));
-border:1px solid rgba(232,185,78,.38);
+linear-gradient(145deg,rgba(232,185,78,.20),rgba(145,245,201,.07));
+border:1px solid rgba(232,185,78,.42);
 box-shadow:
-0 8px 30px rgba(232,185,78,.12),
-inset 0 1px 0 rgba(255,255,255,.16);
+0 0 25px rgba(232,185,78,.12),
+inset 0 1px 0 rgba(255,255,255,.18);
 }
 
 .logoMap svg{
-width:34px;
-height:34px;
-filter:drop-shadow(0 0 7px rgba(232,185,78,.45));
+width:35px;
+height:35px;
+filter:drop-shadow(0 0 8px rgba(145,245,201,.45));
 }
 
 .logoName{
@@ -102,96 +122,90 @@ letter-spacing:-1px;
 .logoSub{
 font-size:7px;
 letter-spacing:2px;
-color:#68756f;
+color:#74827b;
 margin-top:2px;
 }
 
 .navlinks{
 display:flex;
-gap:27px;
-color:#b9c5bf;
+gap:28px;
+color:#c2cec8;
 font-size:13px;
-font-weight:700;
+font-weight:800;
 }
 
-.navlinks a:hover{color:var(--mint)}
+.navlinks a{
+transition:.25s;
+}
+
+.navlinks a:hover{
+color:var(--mint);
+transform:translateY(-1px);
+}
 
 .sellBtn{
 border:0;
 background:linear-gradient(135deg,var(--mint),var(--mint2));
 color:#04100a;
-padding:11px 18px;
+padding:11px 19px;
 border-radius:999px;
 font-size:12px;
-font-weight:900;
+font-weight:950;
+box-shadow:0 8px 25px rgba(85,221,176,.16);
 }
 
 /* HERO */
 
-.hero{padding:35px 0 20px}
+.hero{padding:35px 0 22px}
 
 .heroBox{
 position:relative;
 overflow:hidden;
-min-height:380px;
-padding:52px;
-border-radius:32px;
-border:1px solid rgba(255,255,255,.11);
+min-height:400px;
+padding:55px;
+border-radius:34px;
 background:
-radial-gradient(circle at 78% 20%,rgba(145,245,201,.16),transparent 30%),
-linear-gradient(145deg,rgba(255,255,255,.075),rgba(5,14,9,.93));
+radial-gradient(circle at 75% 20%,rgba(145,245,201,.20),transparent 30%),
+radial-gradient(circle at 90% 90%,rgba(232,185,78,.09),transparent 25%),
+linear-gradient(145deg,rgba(255,255,255,.085),rgba(5,14,9,.78));
+border:1px solid rgba(255,255,255,.13);
 box-shadow:
-0 30px 90px rgba(0,0,0,.4),
-inset 0 1px 0 rgba(255,255,255,.12);
+0 35px 100px rgba(0,0,0,.42),
+inset 0 1px 0 rgba(255,255,255,.14);
 backdrop-filter:blur(30px);
-}
-
-.heroMap{
-position:absolute;
-right:-30px;
-bottom:-100px;
-width:520px;
-height:520px;
-opacity:.16;
-z-index:0;
-}
-
-.heroMap svg{
-width:100%;
-height:100%;
-filter:
-drop-shadow(0 0 20px rgba(232,185,78,.35))
-drop-shadow(0 0 45px rgba(145,245,201,.15));
 }
 
 .heroContent{
 position:relative;
-z-index:3;
+z-index:5;
 }
 
 .eyebrow{
 color:var(--mint);
 font-size:10px;
-font-weight:900;
-letter-spacing:2.4px;
+font-weight:950;
+letter-spacing:2.5px;
 margin-bottom:9px;
 }
 
 .hero h1{
-font-size:clamp(48px,7vw,82px);
-line-height:.92;
+font-size:clamp(50px,7vw,84px);
+line-height:.9;
 letter-spacing:-4px;
 font-weight:950;
-max-width:750px;
+max-width:760px;
 }
 
-.hero h1 span{color:var(--mint)}
+.hero h1 span{
+color:var(--mint);
+text-shadow:0 0 30px rgba(145,245,201,.15);
+}
 
 .hero p{
-max-width:600px;
+max-width:590px;
 color:var(--muted);
 font-size:15px;
-line-height:1.65;
+line-height:1.7;
 margin:20px 0 25px;
 }
 
@@ -202,11 +216,17 @@ flex-wrap:wrap;
 }
 
 .btn{
-padding:13px 20px;
+padding:13px 21px;
 border-radius:999px;
 border:1px solid var(--line);
 font-size:12px;
-font-weight:900;
+font-weight:950;
+transition:.25s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 30px rgba(0,0,0,.25);
 }
 
 .btnMint{
@@ -215,28 +235,91 @@ color:#04100a;
 }
 
 .btnDark{
-background:rgba(255,255,255,.045);
+background:rgba(255,255,255,.055);
 color:white;
+}
+
+/* AFRICA HERO MAP */
+
+.heroMap{
+position:absolute;
+right:-35px;
+bottom:-105px;
+width:540px;
+height:540px;
+opacity:.25;
+z-index:1;
+animation:mapFloat 7s ease-in-out infinite;
+}
+
+.heroMap svg{
+width:100%;
+height:100%;
+filter:
+drop-shadow(0 0 20px rgba(145,245,201,.35))
+drop-shadow(0 0 45px rgba(232,185,78,.20));
+}
+
+@keyframes mapFloat{
+0%,100%{transform:translateY(0) rotate(0deg)}
+50%{transform:translateY(-10px) rotate(1deg)}
+}
+
+/* COUNTRY COLORS */
+
+.country{
+position:absolute;
+border-radius:50%;
+width:13px;
+height:13px;
+box-shadow:0 0 20px currentColor;
+animation:pulse 2.5s infinite;
+}
+
+.country.ng{
+right:46%;
+top:36%;
+color:#55ddb0;
+background:#55ddb0;
+}
+
+.country.gh{
+right:54%;
+top:42%;
+color:#ffd978;
+background:#ffd978;
+}
+
+.country.ke{
+right:31%;
+top:48%;
+color:#91f5c9;
+background:#91f5c9;
+}
+
+.country.za{
+right:38%;
+bottom:17%;
+color:#e8b94e;
+background:#e8b94e;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);opacity:.7}
+50%{transform:scale(1.45);opacity:1}
 }
 
 /* SEARCH */
 
 .search{
-margin-top:-1px;
 position:relative;
-z-index:10;
+z-index:20;
+margin-top:-2px;
 }
 
 .searchGlass{
 padding:9px;
-border-radius:22px;
-border:1px solid rgba(255,255,255,.12);
-background:
-linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
-box-shadow:
-0 20px 60px rgba(0,0,0,.35),
-inset 0 1px 0 rgba(255,255,255,.12);
-backdrop-filter:blur(30px);
+border-radius:23px;
 }
 
 .searchRow{
@@ -250,14 +333,14 @@ display:flex;
 align-items:center;
 gap:9px;
 padding:0 15px;
-min-height:50px;
-border-radius:14px;
-background:rgba(0,0,0,.23);
-border:1px solid rgba(255,255,255,.07);
+min-height:51px;
+border-radius:15px;
+background:rgba(0,0,0,.22);
+border:1px solid rgba(255,255,255,.08);
 }
 
 .searchIcon{
-font-size:21px;
+font-size:22px;
 color:var(--mint);
 }
 
@@ -270,36 +353,96 @@ color:white;
 font-size:12px;
 }
 
-.searchBox input::placeholder{color:#68766f}
+.searchBox input::placeholder{color:#74817b}
 
-.searchSelect,
-.searchButton{
-min-height:50px;
-border-radius:14px;
+.searchSelect,.searchButton{
+min-height:51px;
+border-radius:15px;
 }
 
 .searchSelect{
 padding:0 12px;
-border:1px solid rgba(255,255,255,.07);
-background:rgba(0,0,0,.23);
-color:#d4ddd8;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(0,0,0,.22);
+color:#d8e1dc;
 outline:none;
 font-size:11px;
 }
 
 .searchButton{
 border:0;
-background:var(--mint);
+background:linear-gradient(135deg,var(--mint),var(--mint2));
 color:#04100a;
-font-weight:900;
+font-weight:950;
 font-size:11px;
+}
+
+/* FEATURED FLOATING AD */
+
+.carAd{
+margin-top:18px;
+height:72px;
+overflow:hidden;
+border-radius:20px;
+display:flex;
+align-items:center;
+position:relative;
+}
+
+.adLabel{
+padding:0 17px;
+font-size:8px;
+letter-spacing:2px;
+font-weight:950;
+color:var(--mint);
+white-space:nowrap;
+}
+
+.adTrack{
+display:flex;
+align-items:center;
+gap:10px;
+animation:adMove 22s linear infinite;
+white-space:nowrap;
+}
+
+.adCar{
+min-width:180px;
+height:52px;
+padding:7px 13px;
+border-radius:16px;
+display:flex;
+align-items:center;
+gap:10px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+.adCarIcon{
+font-size:25px;
+}
+
+.adCar strong{
+display:block;
+font-size:11px;
+}
+
+.adCar small{
+display:block;
+color:#829089;
+font-size:8px;
+margin-top:3px;
+}
+
+@keyframes adMove{
+from{transform:translateX(0)}
+to{transform:translateX(-50%)}
 }
 
 /* CATALOGUE */
 
-.catalogue{
-padding:38px 0 20px;
-}
+.catalogue{padding:40px 0 22px}
 
 .sectionTop{
 display:flex;
@@ -309,13 +452,13 @@ margin-bottom:17px;
 }
 
 h2{
-font-size:clamp(28px,4vw,40px);
+font-size:clamp(29px,4vw,41px);
 letter-spacing:-2px;
 font-weight:950;
 }
 
 .count{
-color:#718078;
+color:#78867f;
 font-size:11px;
 }
 
@@ -325,18 +468,18 @@ grid-template-columns:1fr 1fr 1fr auto;
 gap:7px;
 padding:8px;
 margin-bottom:16px;
-border-radius:18px;
+border-radius:19px;
+background:rgba(255,255,255,.04);
 border:1px solid var(--line);
-background:rgba(255,255,255,.035);
 backdrop-filter:blur(20px);
 }
 
 .field{
 width:100%;
-padding:11px;
-border-radius:12px;
-background:rgba(0,0,0,.22);
-border:1px solid rgba(255,255,255,.07);
+padding:12px;
+border-radius:13px;
+background:rgba(0,0,0,.20);
+border:1px solid rgba(255,255,255,.08);
 color:white;
 outline:none;
 font-size:11px;
@@ -345,10 +488,10 @@ font-size:11px;
 .reset{
 padding:0 16px;
 border:0;
-border-radius:12px;
+border-radius:13px;
 background:rgba(145,245,201,.10);
 color:var(--mint);
-font-weight:900;
+font-weight:950;
 font-size:11px;
 }
 
@@ -362,35 +505,51 @@ gap:13px;
 
 .car{
 overflow:hidden;
-border-radius:20px;
-border:1px solid var(--line);
+border-radius:21px;
 background:
-linear-gradient(145deg,rgba(255,255,255,.07),rgba(6,15,10,.84));
+linear-gradient(145deg,rgba(255,255,255,.075),rgba(6,15,10,.75));
+border:1px solid var(--line);
 box-shadow:
-0 15px 40px rgba(0,0,0,.25),
-inset 0 1px 0 rgba(255,255,255,.08);
-transition:.25s;
+0 15px 45px rgba(0,0,0,.25),
+inset 0 1px 0 rgba(255,255,255,.09);
+transition:.3s;
 }
 
 .car:hover{
-transform:translateY(-4px);
-border-color:rgba(145,245,201,.28);
+transform:translateY(-6px);
+border-color:rgba(145,245,201,.32);
+box-shadow:
+0 25px 60px rgba(0,0,0,.35),
+0 0 25px rgba(145,245,201,.06);
 }
 
 .photo{
-height:155px;
+height:158px;
 position:relative;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
 background:
-radial-gradient(circle at 50% 35%,rgba(145,245,201,.15),transparent 43%),
-linear-gradient(135deg,#172b22,#07100c);
-color:#91a099;
+radial-gradient(circle at 50% 35%,rgba(145,245,201,.16),transparent 43%),
+linear-gradient(135deg,#173025,#07100c);
+color:#a0afa7;
 font-size:12px;
 font-weight:900;
 overflow:hidden;
+}
+
+.photo:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.06),transparent 65%);
+transform:translateX(-100%);
+transition:.6s;
+}
+
+.car:hover .photo:after{
+transform:translateX(100%);
 }
 
 .photo img{
@@ -403,13 +562,15 @@ object-fit:cover;
 position:absolute;
 right:9px;
 top:9px;
-width:34px;
-height:34px;
+z-index:3;
+width:35px;
+height:35px;
 border-radius:50%;
-border:1px solid rgba(255,255,255,.12);
-background:rgba(0,0,0,.4);
+border:1px solid rgba(255,255,255,.14);
+background:rgba(0,0,0,.42);
 color:white;
 font-size:15px;
+backdrop-filter:blur(10px);
 }
 
 .heart.saved{color:var(--mint)}
@@ -420,16 +581,16 @@ font-size:15px;
 display:inline-block;
 padding:4px 8px;
 border-radius:999px;
-background:rgba(145,245,201,.08);
+background:rgba(145,245,201,.09);
 color:var(--mint);
 font-size:8px;
-font-weight:900;
+font-weight:950;
 }
 
 .car h3{
 font-size:15px;
 margin-top:8px;
-font-weight:900;
+font-weight:950;
 }
 
 .price{
@@ -440,78 +601,115 @@ margin:6px 0 3px;
 
 .spec{
 font-size:10px;
-color:#78857f;
+color:#7f8d86;
 }
 
 .view{
 width:100%;
 margin-top:11px;
 padding:9px;
-border-radius:11px;
-border:1px solid rgba(255,255,255,.08);
+border-radius:12px;
+border:1px solid rgba(255,255,255,.09);
 background:rgba(255,255,255,.045);
 color:white;
 font-size:10px;
-font-weight:900;
+font-weight:950;
+transition:.2s;
 }
 
-/* AFRICA */
+.view:hover{
+background:rgba(145,245,201,.10);
+color:var(--mint);
+}
+
+/* AFRICA SECTION */
 
 .africaSection{
-padding:38px 0 25px;
+padding:40px 0 27px;
 }
 
 .africaBox{
 position:relative;
 overflow:hidden;
-min-height:300px;
-padding:40px;
+min-height:330px;
+padding:42px;
 display:flex;
 align-items:center;
-border-radius:28px;
-border:1px solid rgba(255,255,255,.10);
+border-radius:30px;
 background:
-linear-gradient(145deg,rgba(255,255,255,.065),rgba(6,15,10,.9));
+radial-gradient(circle at 75% 50%,rgba(145,245,201,.09),transparent 35%),
+linear-gradient(145deg,rgba(255,255,255,.07),rgba(6,15,10,.82));
+border:1px solid rgba(255,255,255,.11);
 box-shadow:
-0 25px 75px rgba(0,0,0,.3),
-inset 0 1px 0 rgba(255,255,255,.09);
+0 28px 80px rgba(0,0,0,.3),
+inset 0 1px 0 rgba(255,255,255,.10);
 }
 
 .africaText{
 position:relative;
-z-index:4;
+z-index:5;
 max-width:510px;
 }
 
 .africaText p{
 margin-top:12px;
-color:#83918b;
+color:#87958e;
 font-size:13px;
-line-height:1.65;
+line-height:1.7;
 }
 
 .bigMap{
 position:absolute;
-right:-15px;
+right:5px;
 top:-80px;
-width:490px;
-height:490px;
-opacity:.13;
+width:520px;
+height:520px;
+opacity:.20;
+animation:mapFloat 8s ease-in-out infinite reverse;
 }
 
 .bigMap svg{
 width:100%;
 height:100%;
 filter:
-drop-shadow(0 0 22px rgba(232,185,78,.45))
-drop-shadow(0 0 45px rgba(145,245,201,.15));
+drop-shadow(0 0 25px rgba(145,245,201,.30))
+drop-shadow(0 0 50px rgba(232,185,78,.18));
+}
+
+/* MAP LEGEND */
+
+.mapLegend{
+position:absolute;
+right:30px;
+bottom:25px;
+z-index:6;
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+}
+
+.legend{
+padding:7px 10px;
+border-radius:999px;
+font-size:8px;
+font-weight:900;
+background:rgba(0,0,0,.32);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+}
+
+.legend i{
+display:inline-block;
+width:7px;
+height:7px;
+border-radius:50%;
+margin-right:5px;
+background:var(--mint);
 }
 
 /* FEATURES */
 
-.features{
-padding:30px 0 55px;
-}
+.features{padding:32px 0 55px}
 
 .featureGrid{
 display:grid;
@@ -521,25 +719,32 @@ margin-top:18px;
 }
 
 .feature{
-padding:22px;
-border-radius:20px;
-border:1px solid var(--line);
+padding:23px;
+border-radius:21px;
 background:
-linear-gradient(145deg,rgba(255,255,255,.065),rgba(7,17,11,.7));
-box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+linear-gradient(145deg,rgba(255,255,255,.065),rgba(7,17,11,.68));
+border:1px solid var(--line);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+transition:.3s;
+}
+
+.feature:hover{
+transform:translateY(-4px);
+border-color:rgba(145,245,201,.25);
 }
 
 .icon{
-width:42px;
-height:42px;
+width:44px;
+height:44px;
 display:flex;
 align-items:center;
 justify-content:center;
-border-radius:14px;
-background:rgba(145,245,201,.08);
+border-radius:15px;
+background:rgba(145,245,201,.09);
 color:var(--mint);
 font-size:19px;
 margin-bottom:13px;
+box-shadow:0 0 25px rgba(145,245,201,.05);
 }
 
 .feature h3{
@@ -550,22 +755,20 @@ margin-bottom:7px;
 .feature p{
 color:#7d8b84;
 font-size:12px;
-line-height:1.55;
+line-height:1.6;
 }
 
 /* SELL */
 
-.sell{
-padding-bottom:60px;
-}
+.sell{padding-bottom:60px}
 
 .sellBox{
-padding:30px;
-border-radius:24px;
-border:1px solid var(--line);
+padding:32px;
+border-radius:25px;
 background:
-linear-gradient(145deg,rgba(145,245,201,.07),rgba(255,255,255,.025));
-box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+linear-gradient(145deg,rgba(145,245,201,.09),rgba(255,255,255,.025));
+border:1px solid var(--line);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.09);
 }
 
 .sellBox p{
@@ -575,49 +778,86 @@ line-height:1.6;
 margin:10px 0 18px;
 }
 
-/* FLOATING MENU */
+/* LIQUID BUBBLE MENU */
 
 .bubble{
 position:fixed;
 right:18px;
 bottom:20px;
 z-index:300;
-width:58px;
-height:58px;
+width:61px;
+height:61px;
 border-radius:50%;
-border:1px solid rgba(145,245,201,.34);
-background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(145,245,201,.05));
+border:1px solid rgba(145,245,201,.38);
+background:
+radial-gradient(circle at 30% 25%,rgba(255,255,255,.30),transparent 20%),
+linear-gradient(145deg,rgba(255,255,255,.16),rgba(145,245,201,.06));
 color:var(--mint);
 box-shadow:
-0 18px 50px rgba(0,0,0,.5),
-inset 0 1px 0 rgba(255,255,255,.18);
+0 18px 55px rgba(0,0,0,.52),
+0 0 30px rgba(145,245,201,.10),
+inset 0 1px 0 rgba(255,255,255,.25);
 backdrop-filter:blur(25px);
 font-size:21px;
+transition:.25s;
+}
+
+.bubble:hover{
+transform:scale(1.08);
+}
+
+.bubble:before{
+content:"";
+position:absolute;
+inset:-5px;
+border-radius:50%;
+border:1px solid rgba(145,245,201,.10);
+animation:ripple 2.5s infinite;
+}
+
+@keyframes ripple{
+0%{transform:scale(.9);opacity:.7}
+100%{transform:scale(1.35);opacity:0}
 }
 
 .bubbleMenu{
 position:fixed;
 right:18px;
-bottom:88px;
+bottom:92px;
 z-index:299;
 display:none;
 flex-direction:column;
 align-items:flex-end;
-gap:8px;
+gap:9px;
 }
 
 .bubbleMenu.open{display:flex}
 
 .bubbleItem{
-border:1px solid var(--line);
+border:1px solid rgba(255,255,255,.12);
 background:
-linear-gradient(145deg,rgba(255,255,255,.10),rgba(8,20,14,.82));
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.14),transparent 25%),
+linear-gradient(145deg,rgba(255,255,255,.11),rgba(8,20,14,.80));
 color:white;
-padding:11px 16px;
+padding:12px 17px;
 border-radius:999px;
 font-size:12px;
-font-weight:800;
-backdrop-filter:blur(22px);
+font-weight:900;
+backdrop-filter:blur(24px);
+box-shadow:
+0 12px 35px rgba(0,0,0,.30),
+inset 0 1px 0 rgba(255,255,255,.14);
+animation:bubbleIn .25s ease both;
+}
+
+.bubbleItem:hover{
+color:var(--mint);
+border-color:rgba(145,245,201,.30);
+}
+
+@keyframes bubbleIn{
+from{opacity:0;transform:translateY(10px) scale(.9)}
+to{opacity:1;transform:translateY(0) scale(1)}
 }
 
 /* MODAL */
@@ -630,8 +870,8 @@ display:none;
 align-items:center;
 justify-content:center;
 padding:18px;
-background:rgba(0,0,0,.74);
-backdrop-filter:blur(16px);
+background:rgba(0,0,0,.70);
+backdrop-filter:blur(17px);
 }
 
 .modal.open{display:flex}
@@ -641,10 +881,9 @@ width:min(100%,650px);
 max-height:92vh;
 overflow:auto;
 padding:25px;
-border-radius:27px;
-border:1px solid rgba(255,255,255,.12);
-background:
-linear-gradient(145deg,rgba(20,35,28,.97),rgba(4,11,7,.98));
+border-radius:28px;
+background:linear-gradient(145deg,rgba(20,38,29,.97),rgba(4,11,7,.98));
+border:1px solid rgba(255,255,255,.13);
 box-shadow:0 35px 100px rgba(0,0,0,.65);
 }
 
@@ -656,8 +895,8 @@ margin-bottom:20px;
 }
 
 .close{
-width:38px;
-height:38px;
+width:39px;
+height:39px;
 border-radius:50%;
 border:1px solid var(--line);
 background:rgba(255,255,255,.05);
@@ -677,14 +916,12 @@ flex-direction:column;
 gap:6px;
 }
 
-.formGroup.full{
-grid-column:1/-1;
-}
+.formGroup.full{grid-column:1/-1}
 
 .formGroup label{
 font-size:9px;
 color:#8b9992;
-font-weight:900;
+font-weight:950;
 }
 
 .formInput{
@@ -710,13 +947,13 @@ border:0;
 border-radius:999px;
 background:linear-gradient(135deg,var(--mint),var(--mint2));
 color:#04100a;
-font-weight:900;
+font-weight:950;
 }
 
 .upload{
 padding:20px;
 border-radius:15px;
-border:1px dashed rgba(145,245,201,.3);
+border:1px dashed rgba(145,245,201,.30);
 background:rgba(145,245,201,.035);
 text-align:center;
 cursor:pointer;
@@ -752,10 +989,23 @@ flex-wrap:wrap;
 /* MOBILE */
 
 @media(max-width:1050px){
-.cars{grid-template-columns:repeat(3,1fr)}
-.searchRow{grid-template-columns:1fr 1fr}
-.searchBox{grid-column:1/-1}
-.searchButton{grid-column:1/-1}
+
+.cars{
+grid-template-columns:repeat(3,1fr);
+}
+
+.searchRow{
+grid-template-columns:1fr 1fr;
+}
+
+.searchBox{
+grid-column:1/-1;
+}
+
+.searchButton{
+grid-column:1/-1;
+}
+
 }
 
 @media(max-width:800px){
@@ -773,18 +1023,24 @@ grid-template-columns:1fr;
 }
 
 .heroBox{
-padding:38px 27px;
+padding:40px 28px;
 }
 
 .heroMap{
-width:400px;
-height:400px;
-right:-80px;
+width:420px;
+height:420px;
+right:-100px;
+opacity:.20;
 }
 
 .bigMap{
-right:-110px;
-opacity:.10;
+right:-100px;
+opacity:.16;
+}
+
+.mapLegend{
+right:15px;
+bottom:15px;
 }
 
 }
@@ -798,8 +1054,8 @@ opacity:.10;
 .logoName{font-size:18px}
 
 .logoMap{
-width:36px;
-height:36px;
+width:37px;
+height:37px;
 }
 
 .logoMap svg{
@@ -813,18 +1069,18 @@ font-size:10px;
 }
 
 .hero{
-padding-top:26px;
+padding-top:25px;
 }
 
 .heroBox{
-padding:31px 21px;
-min-height:365px;
-border-radius:25px;
+padding:32px 21px;
+min-height:390px;
+border-radius:26px;
 }
 
 .hero h1{
-font-size:48px;
-letter-spacing:-2.7px;
+font-size:49px;
+letter-spacing:-2.8px;
 }
 
 .hero p{
@@ -832,11 +1088,11 @@ font-size:13px;
 }
 
 .heroMap{
-width:360px;
-height:360px;
-right:-115px;
-bottom:-55px;
-opacity:.13;
+width:350px;
+height:350px;
+right:-110px;
+bottom:-50px;
+opacity:.17;
 }
 
 .searchRow{
@@ -847,6 +1103,19 @@ grid-template-columns:1fr;
 .searchSelect,
 .searchButton{
 grid-column:auto;
+}
+
+.carAd{
+height:68px;
+}
+
+.adLabel{
+padding:0 10px;
+font-size:7px;
+}
+
+.adCar{
+min-width:165px;
 }
 
 .filters{
@@ -883,16 +1152,21 @@ font-size:9px;
 }
 
 .africaBox{
-min-height:350px;
-padding:28px 22px;
+min-height:390px;
+padding:29px 22px;
 align-items:flex-start;
 }
 
 .bigMap{
 width:390px;
 height:390px;
-right:-130px;
-top:55px;
+right:-125px;
+top:65px;
+opacity:.17;
+}
+
+.mapLegend{
+display:none;
 }
 
 .formGrid{
@@ -901,6 +1175,18 @@ grid-template-columns:1fr;
 
 .formGroup.full{
 grid-column:auto;
+}
+
+.bubble{
+right:15px;
+bottom:16px;
+width:57px;
+height:57px;
+}
+
+.bubbleMenu{
+right:15px;
+bottom:84px;
 }
 
 }
@@ -916,20 +1202,18 @@ grid-column:auto;
 
 <div class="logoMap">
 
-<!-- AFRICA MAP — NO EXTERNAL IMAGE -->
-<svg viewBox="0 0 220 240" aria-label="Africa">
+<!-- SMALL AFRICA MAP -->
+<svg viewBox="0 0 220 240" aria-label="Africa map">
 
 <defs>
-<linearGradient id="goldAfrica" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#ffd978"/>
+<linearGradient id="smallAfrica" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#91f5c9"/>
 <stop offset="45%" stop-color="#e8b94e"/>
-<stop offset="100%" stop-color="#91f5c9"/>
+<stop offset="100%" stop-color="#ffd978"/>
 </linearGradient>
 </defs>
 
-<path
-fill="url(#goldAfrica)"
-d="
+<path fill="url(#smallAfrica)" d="
 M105 7
 C91 11 79 21 73 33
 C66 46 67 56 58 66
@@ -946,22 +1230,17 @@ C181 103 175 95 169 87
 C162 77 162 65 158 53
 C154 40 146 29 137 20
 C128 11 117 5 105 7Z
-
 M159 88
 C168 83 178 84 185 90
 C191 95 195 103 190 108
 C184 113 175 111 170 106
-C165 101 159 96 159 88Z
-"/>
-
+C165 101 159 96 159 88Z"/>
 </svg>
 
 </div>
 
 <div>
-<div class="logoName">
-CarHub <span>Africa</span>
-</div>
+<div class="logoName">CarHub <span>Africa</span></div>
 <div class="logoSub">AUTOMOTIVE MARKETPLACE</div>
 </div>
 
@@ -973,9 +1252,7 @@ CarHub <span>Africa</span>
 <a href="#sell">Sell</a>
 </nav>
 
-<button class="sellBtn" onclick="openSell()">
-Sell a car
-</button>
+<button class="sellBtn" onclick="openSell()">Sell a car</button>
 
 </div>
 </header>
@@ -989,24 +1266,18 @@ Sell a car
 
 <div class="heroMap">
 
-<!-- BIG AFRICA MAP -->
 <svg viewBox="0 0 220 240">
 
 <defs>
-
-<linearGradient id="heroGold" x1="0" y1="0" x2="1" y2="1">
-
+<linearGradient id="heroAfrica" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0%" stop-color="#91f5c9"/>
-<stop offset="48%" stop-color="#e8b94e"/>
+<stop offset="35%" stop-color="#55ddb0"/>
+<stop offset="68%" stop-color="#e8b94e"/>
 <stop offset="100%" stop-color="#ffd978"/>
-
 </linearGradient>
-
 </defs>
 
-<path
-fill="url(#heroGold)"
-d="
+<path fill="url(#heroAfrica)" d="
 M105 7
 C91 11 79 21 73 33
 C66 46 67 56 58 66
@@ -1023,26 +1294,27 @@ C181 103 175 95 169 87
 C162 77 162 65 158 53
 C154 40 146 29 137 20
 C128 11 117 5 105 7Z
-
 M159 88
 C168 83 178 84 185 90
 C191 95 195 103 190 108
 C184 113 175 111 170 106
-C165 101 159 96 159 88Z
-"/>
+C165 101 159 96 159 88Z"/>
 
 </svg>
+
+<div class="country ng"></div>
+<div class="country gh"></div>
+<div class="country ke"></div>
+<div class="country za"></div>
 
 </div>
 
 <div class="heroContent">
 
-<div class="eyebrow">
-WELCOME TO CARHUB AFRICA
-</div>
+<div class="eyebrow">WELCOME TO CARHUB AFRICA</div>
 
 <h1>
-Buy. Sell.
+Buy. Sell.<br>
 <span>Drive.</span>
 </h1>
 
@@ -1054,9 +1326,7 @@ car move with confidence.
 
 <div class="heroButtons">
 
-<a href="#cars" class="btn btnMint">
-Browse vehicles
-</a>
+<a href="#cars" class="btn btnMint">Browse vehicles</a>
 
 <button class="btn btnDark" onclick="openSell()">
 List your car
@@ -1077,7 +1347,7 @@ List your car
 
 <div class="container">
 
-<div class="searchGlass">
+<div class="searchGlass glass">
 
 <div class="searchRow">
 
@@ -1085,8 +1355,7 @@ List your car
 
 <span class="searchIcon">⌕</span>
 
-<input
-id="search"
+<input id="search"
 placeholder="Search cars, brands, models or years...">
 
 </div>
@@ -1120,6 +1389,59 @@ Search
 
 </div>
 
+
+<!-- FLOATING CAR AD -->
+
+<div class="carAd glass">
+
+<div class="adLabel">LIVE CARS</div>
+
+<div class="adTrack">
+
+<div class="adCar">
+<div class="adCarIcon">🚙</div>
+<div><strong>Toyota Land Cruiser</strong><small>₦78M • Abuja</small></div>
+</div>
+
+<div class="adCar">
+<div class="adCarIcon">🚘</div>
+<div><strong>Lexus RX 350</strong><small>₦52M • Lagos</small></div>
+</div>
+
+<div class="adCar">
+<div class="adCarIcon">🏎️</div>
+<div><strong>Mercedes C300</strong><small>₦38.5M • Abuja</small></div>
+</div>
+
+<div class="adCar">
+<div class="adCarIcon">🚗</div>
+<div><strong>Honda CR-V</strong><small>₦31M • Lagos</small></div>
+</div>
+
+<div class="adCar">
+<div class="adCarIcon">🚙</div>
+<div><strong>BMW X5</strong><small>₦60M • Abuja</small></div>
+</div>
+
+<div class="adCar">
+<div class="adCarIcon">🚘</div>
+<div><strong>Hyundai Tucson</strong><small>₦29.5M • Port Harcourt</small></div>
+</div>
+
+<div class="adCar">
+<div class="adCarIcon">🚙</div>
+<div><strong>Toyota Land Cruiser</strong><small>₦78M • Abuja</small></div>
+</div>
+
+<div class="adCar">
+<div class="adCarIcon">🚘</div>
+<div><strong>Lexus RX 350</strong><small>₦52M • Lagos</small></div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </section>
@@ -1133,13 +1455,9 @@ Search
 
 <div>
 
-<div class="eyebrow">
-FEATURED VEHICLES
-</div>
+<div class="eyebrow">FEATURED VEHICLES</div>
 
-<h2>
-Find your next car
-</h2>
+<h2>Find your next car</h2>
 
 </div>
 
@@ -1150,8 +1468,7 @@ Find your next car
 
 <div class="filters">
 
-<input
-id="quickSearch"
+<input id="quickSearch"
 class="field"
 placeholder="Quick filter...">
 
@@ -1176,9 +1493,7 @@ placeholder="Quick filter...">
 
 </select>
 
-<button class="reset" onclick="resetFilters()">
-Reset
-</button>
+<button class="reset" onclick="resetFilters()">Reset</button>
 
 </div>
 
@@ -1200,20 +1515,15 @@ Reset
 <svg viewBox="0 0 220 240">
 
 <defs>
-
 <linearGradient id="largeAfrica" x1="0" y1="0" x2="1" y2="1">
-
-<stop offset="0%" stop-color="#91f5c9"/>
-<stop offset="50%" stop-color="#e8b94e"/>
+<stop offset="0%" stop-color="#55ddb0"/>
+<stop offset="30%" stop-color="#91f5c9"/>
+<stop offset="60%" stop-color="#e8b94e"/>
 <stop offset="100%" stop-color="#ffd978"/>
-
 </linearGradient>
-
 </defs>
 
-<path
-fill="url(#largeAfrica)"
-d="
+<path fill="url(#largeAfrica)" d="
 M105 7
 C91 11 79 21 73 33
 C66 46 67 56 58 66
@@ -1230,23 +1540,24 @@ C181 103 175 95 169 87
 C162 77 162 65 158 53
 C154 40 146 29 137 20
 C128 11 117 5 105 7Z
-
 M159 88
 C168 83 178 84 185 90
 C191 95 195 103 190 108
 C184 113 175 111 170 106
-C165 101 159 96 159 88Z
-"/>
+C165 101 159 96 159 88Z"/>
 
 </svg>
+
+<div class="country ng"></div>
+<div class="country gh"></div>
+<div class="country ke"></div>
+<div class="country za"></div>
 
 </div>
 
 <div class="africaText">
 
-<div class="eyebrow">
-BUILT FOR AFRICA
-</div>
+<div class="eyebrow">BUILT FOR AFRICA</div>
 
 <h2>
 One marketplace.<br>
@@ -1261,6 +1572,14 @@ modern marketplace built for Africa.
 
 </div>
 
+<div class="mapLegend">
+
+<div class="legend"><i></i>Nigeria</div>
+<div class="legend"><i style="background:#e8b94e"></i>South Africa</div>
+<div class="legend"><i style="background:#ffd978"></i>Ghana</div>
+
+</div>
+
 </div>
 
 </div>
@@ -1272,13 +1591,9 @@ modern marketplace built for Africa.
 
 <div class="container">
 
-<div class="eyebrow">
-WHY CARHUB AFRICA
-</div>
+<div class="eyebrow">WHY CARHUB AFRICA</div>
 
-<h2>
-Everything in one place
-</h2>
+<h2>Everything in one place</h2>
 
 <div class="featureGrid">
 
@@ -1331,13 +1646,9 @@ Create professional vehicle listings and reach buyers.
 
 <div class="sellBox">
 
-<div class="eyebrow">
-SELL ON CARHUB
-</div>
+<div class="eyebrow">SELL ON CARHUB</div>
 
-<h2>
-Ready to sell your car?
-</h2>
+<h2>Ready to sell your car?</h2>
 
 <p>
 Create your vehicle listing and reach buyers through CarHub Africa.
@@ -1362,16 +1673,14 @@ Start a listing
 CarHub <span style="color:#91f5c9">Africa</span>
 </strong>
 
-<span>
-© 2026 CarHub Africa
-</span>
+<span>© 2026 CarHub Africa</span>
 
 </div>
 
 </footer>
 
 
-<!-- FLOATING GLASS MENU -->
+<!-- LIQUID MENU -->
 
 <div class="bubbleMenu" id="bubbleMenu">
 
@@ -1393,9 +1702,7 @@ CarHub <span style="color:#91f5c9">Africa</span>
 
 </div>
 
-<button class="bubble" onclick="toggleBubble()">
-☰
-</button>
+<button class="bubble" onclick="toggleBubble()">☰</button>
 
 
 <!-- SELL MODAL -->
@@ -1408,13 +1715,9 @@ CarHub <span style="color:#91f5c9">Africa</span>
 
 <div>
 
-<div class="eyebrow">
-CARHUB AFRICA
-</div>
+<div class="eyebrow">CARHUB AFRICA</div>
 
-<h2>
-Create listing
-</h2>
+<h2>Create listing</h2>
 
 </div>
 
@@ -1433,14 +1736,9 @@ Create listing
 
 <label class="upload">
 
-<input
-type="file"
-id="vehiclePhoto"
-accept="image/*">
+<input type="file" id="vehiclePhoto" accept="image/*">
 
-<div id="uploadText">
-＋ Add vehicle photo
-</div>
+<div id="uploadText">＋ Add vehicle photo</div>
 
 <img id="previewImg" class="previewImg">
 
@@ -1472,8 +1770,7 @@ accept="image/*">
 
 <label>MODEL</label>
 
-<input
-id="newModel"
+<input id="newModel"
 class="formInput"
 placeholder="e.g. Camry"
 required>
@@ -1485,8 +1782,7 @@ required>
 
 <label>YEAR</label>
 
-<input
-id="newYear"
+<input id="newYear"
 class="formInput"
 type="number"
 placeholder="2022"
@@ -1499,8 +1795,7 @@ required>
 
 <label>PRICE ₦</label>
 
-<input
-id="newPrice"
+<input id="newPrice"
 class="formInput"
 placeholder="35,000,000"
 required>
@@ -1528,8 +1823,7 @@ required>
 
 <label>MILEAGE</label>
 
-<input
-id="newMileage"
+<input id="newMileage"
 class="formInput"
 placeholder="45,000 km">
 
@@ -1570,8 +1864,7 @@ placeholder="45,000 km">
 
 <label>LOCATION</label>
 
-<input
-id="newLocation"
+<input id="newLocation"
 class="formInput"
 placeholder="Abuja, Nigeria">
 
@@ -1582,8 +1875,7 @@ placeholder="Abuja, Nigeria">
 
 <label>DESCRIPTION</label>
 
-<textarea
-id="newDescription"
+<textarea id="newDescription"
 class="formInput"
 placeholder="Tell buyers about this vehicle..."></textarea>
 
@@ -1591,9 +1883,7 @@ placeholder="Tell buyers about this vehicle..."></textarea>
 
 </div>
 
-<button class="publish">
-Publish vehicle
-</button>
+<button class="publish">Publish vehicle</button>
 
 </form>
 
@@ -1698,18 +1988,11 @@ function filters(){
 
 return{
 
-search:document
-.getElementById("search")
-.value
-.toLowerCase(),
+search:document.getElementById("search").value.toLowerCase(),
 
-make:document
-.getElementById("make")
-.value,
+make:document.getElementById("make").value,
 
-type:document
-.getElementById("type")
-.value
+type:document.getElementById("type").value
 
 };
 
@@ -1742,9 +2025,7 @@ list.length+" vehicles";
 
 document.getElementById("carsList").innerHTML=
 
-list.length
-
-?
+list.length ?
 
 list.map(car=>`
 
@@ -1770,21 +2051,15 @@ onclick="saveCar('${car.id}')">
 
 <div class="info">
 
-<span class="tag">
-${car.type}
-</span>
+<span class="tag">${car.type}</span>
 
 <h3>
 ${car.year} ${car.make} ${car.model}
 </h3>
 
-<div class="price">
-${car.price}
-</div>
+<div class="price">${car.price}</div>
 
-<div class="spec">
-${car.spec}
-</div>
+<div class="spec">${car.spec}</div>
 
 <div class="spec" style="margin-top:3px">
 ${car.location||"Nigeria"}
@@ -1824,13 +2099,9 @@ No vehicles found.
 function saveCar(id){
 
 if(saved.includes(id)){
-
 saved=saved.filter(x=>x!==id);
-
 }else{
-
 saved.push(id);
-
 }
 
 localStorage.setItem(
@@ -1860,47 +2131,37 @@ render();
 
 function scrollCars(){
 
-document
-.getElementById("cars")
-.scrollIntoView({
-behavior:"smooth"
-});
+document.getElementById("cars")
+.scrollIntoView({behavior:"smooth"});
 
 }
 
 
 function toggleBubble(){
 
-document
-.getElementById("bubbleMenu")
-.classList
-.toggle("open");
+document.getElementById("bubbleMenu")
+.classList.toggle("open");
 
 }
 
 
 function openSell(){
 
-document
-.getElementById("sellModal")
-.classList
-.add("open");
+document.getElementById("sellModal")
+.classList.add("open");
 
 }
 
 
 function closeSell(){
 
-document
-.getElementById("sellModal")
-.classList
-.remove("open");
+document.getElementById("sellModal")
+.classList.remove("open");
 
 }
 
 
-document
-.getElementById("vehiclePhoto")
+document.getElementById("vehiclePhoto")
 .addEventListener("change",function(){
 
 const file=this.files[0];
@@ -1925,8 +2186,7 @@ reader.readAsDataURL(file);
 });
 
 
-document
-.getElementById("sellForm")
+document.getElementById("sellForm")
 .addEventListener("submit",function(e){
 
 e.preventDefault();
@@ -2001,9 +2261,7 @@ scrollCars();
 
 function viewCar(id){
 
-const car=vehicles.find(
-x=>x.id===id
-);
+const car=vehicles.find(x=>x.id===id);
 
 if(!car)return;
 
@@ -2012,7 +2270,7 @@ document.body.innerHTML=`
 <div style="
 min-height:100vh;
 padding:20px;
-background:#030705;
+background:#07110d;
 color:white;
 font-family:Arial,Helvetica,sans-serif;
 ">
@@ -2051,7 +2309,7 @@ font-weight:950;
 color:#91f5c9;
 background:
 radial-gradient(circle,rgba(145,245,201,.17),transparent 45%),
-linear-gradient(135deg,#172c23,#08100d);
+linear-gradient(135deg,#173025,#08100d);
 overflow:hidden;
 ">
 
@@ -2207,13 +2465,9 @@ modal.innerHTML=`
 
 <div>
 
-<div class="eyebrow">
-INSPECTION
-</div>
+<div class="eyebrow">INSPECTION</div>
 
-<h2>
-Book inspection
-</h2>
+<h2>Book inspection</h2>
 
 </div>
 
@@ -2305,17 +2559,11 @@ document.body.appendChild(modal);
 
 function confirmInspection(name){
 
-const date=document
-.getElementById("inspectionDate")
-.value;
+const date=document.getElementById("inspectionDate").value;
 
-const person=document
-.getElementById("inspectionName")
-.value;
+const person=document.getElementById("inspectionName").value;
 
-const phone=document
-.getElementById("inspectionPhone")
-.value;
+const phone=document.getElementById("inspectionPhone").value;
 
 if(!date||!person||!phone){
 
@@ -2338,9 +2586,7 @@ phone:phone
 
 alert("Inspection request received.");
 
-document
-.querySelector(".modal.open")
-.remove();
+document.querySelector(".modal.open").remove();
 
 }
 
@@ -2359,13 +2605,9 @@ modal.innerHTML=`
 
 <div>
 
-<div class="eyebrow">
-SELLER
-</div>
+<div class="eyebrow">SELLER</div>
 
-<h2>
-Contact seller
-</h2>
+<h2>Contact seller</h2>
 
 </div>
 
@@ -2423,8 +2665,7 @@ function sendMessage(){
 
 const message=document
 .getElementById("sellerMessage")
-.value
-.trim();
+.value.trim();
 
 if(!message){
 
@@ -2436,9 +2677,7 @@ return;
 
 alert("Message prepared for the seller.");
 
-document
-.querySelector(".modal.open")
-.remove();
+document.querySelector(".modal.open").remove();
 
 }
 
@@ -2451,9 +2690,7 @@ x=>saved.includes(x.id)
 
 document.getElementById("carsList").innerHTML=
 
-list.length
-
-?
+list.length ?
 
 list.map(car=>`
 
@@ -2485,13 +2722,9 @@ onclick="saveCar('${car.id}')">
 ${car.year} ${car.make} ${car.model}
 </h3>
 
-<div class="price">
-${car.price}
-</div>
+<div class="price">${car.price}</div>
 
-<div class="spec">
-${car.spec}
-</div>
+<div class="spec">${car.spec}</div>
 
 <button
 class="view"
@@ -2534,8 +2767,7 @@ scrollCars();
 
 /* SEARCH */
 
-document
-.getElementById("search")
+document.getElementById("search")
 .addEventListener("input",function(){
 
 document.getElementById("quickSearch").value=this.value;
@@ -2545,8 +2777,7 @@ render();
 });
 
 
-document
-.getElementById("make")
+document.getElementById("make")
 .addEventListener("change",function(){
 
 document.getElementById("quickMake").value=this.value;
@@ -2556,8 +2787,7 @@ render();
 });
 
 
-document
-.getElementById("type")
+document.getElementById("type")
 .addEventListener("change",function(){
 
 document.getElementById("quickType").value=this.value;
@@ -2567,8 +2797,7 @@ render();
 });
 
 
-document
-.getElementById("quickSearch")
+document.getElementById("quickSearch")
 .addEventListener("input",function(){
 
 document.getElementById("search").value=this.value;
@@ -2578,8 +2807,7 @@ render();
 });
 
 
-document
-.getElementById("quickMake")
+document.getElementById("quickMake")
 .addEventListener("change",function(){
 
 document.getElementById("make").value=this.value;
@@ -2589,8 +2817,7 @@ render();
 });
 
 
-document
-.getElementById("quickType")
+document.getElementById("quickType")
 .addEventListener("change",function(){
 
 document.getElementById("type").value=this.value;
@@ -2603,9 +2830,7 @@ render();
 document.addEventListener("click",function(e){
 
 if(e.target.classList.contains("modal")){
-
 e.target.remove();
-
 }
 
 });
