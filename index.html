@@ -3,416 +3,652 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CarHub Africa</title>
+<meta name="theme-color" content="#050907">
+<title>CarHub Africa — Buy. Sell. Drive.</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
 :root{
---bg:#050b08;
---surface:#0b1511;
---surface2:#101f18;
+--bg:#040806;
+--bg2:#07100c;
+--glass:rgba(255,255,255,.055);
+--glass2:rgba(255,255,255,.085);
 --mint:#91f5c9;
+--mint2:#67e8b0;
 --white:#f7faf8;
---muted:#93a29b;
---border:rgba(255,255,255,.09);
+--muted:#8f9d97;
+--line:rgba(255,255,255,.10);
+--shadow:0 24px 70px rgba(0,0,0,.42);
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-font-family:Arial,Helvetica,sans-serif;
+font-family:"DM Sans",Arial,sans-serif;
 background:
-radial-gradient(circle at 80% 0%,rgba(80,220,160,.10),transparent 30%),
-var(--bg);
+radial-gradient(circle at 85% -5%,rgba(110,235,180,.16),transparent 27%),
+radial-gradient(circle at 0% 35%,rgba(60,150,115,.08),transparent 25%),
+linear-gradient(145deg,#030605,#07100b 55%,#030605);
 color:var(--white);
 min-height:100vh;
+overflow-x:hidden;
 }
 
-a{text-decoration:none;color:inherit}
-button,input,select,textarea{font:inherit}
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background:
+linear-gradient(120deg,transparent 35%,rgba(255,255,255,.025) 50%,transparent 65%);
+z-index:-1;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+select,
+textarea{
+font:inherit;
+}
+
+button{
+cursor:pointer;
+}
 
 .container{
-width:92%;
-max-width:1250px;
+width:min(94%,1240px);
 margin:auto;
 }
+
+/* =========================
+HEADER
+========================= */
 
 header{
 position:sticky;
 top:0;
 z-index:100;
-background:rgba(5,11,8,.78);
-backdrop-filter:blur(22px);
-border-bottom:1px solid var(--border);
+padding:10px 0;
+background:rgba(4,8,6,.62);
+border-bottom:1px solid rgba(255,255,255,.07);
+backdrop-filter:blur(25px) saturate(160%);
+-webkit-backdrop-filter:blur(25px) saturate(160%);
 }
 
 .nav{
-height:72px;
+height:62px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+gap:20px;
 }
 
 .logo{
-font-size:24px;
-font-weight:950;
+font-family:"Manrope",sans-serif;
+font-size:23px;
+font-weight:800;
 letter-spacing:-1.2px;
 }
 
-.logo span{color:var(--mint)}
+.logo span{
+color:var(--mint);
+}
 
 .navlinks{
 display:flex;
-gap:28px;
-color:#c8d2cd;
-font-size:14px;
+gap:30px;
+font-size:13px;
 font-weight:700;
+color:#b9c5c0;
 }
 
-.navlinks a:hover{color:var(--mint)}
+.navlinks a{
+transition:.2s;
+}
+
+.navlinks a:hover{
+color:var(--mint);
+}
 
 .sellBtn{
-background:var(--mint);
+border:1px solid rgba(145,245,201,.28);
+background:linear-gradient(135deg,var(--mint),#72e8b8);
 color:#04100a;
 padding:11px 18px;
 border-radius:999px;
-font-weight:900;
-border:0;
-cursor:pointer;
+font-weight:800;
+box-shadow:0 8px 25px rgba(75,220,160,.13);
 }
+
+/* =========================
+LIQUID GLASS BUBBLE
+========================= */
 
 .bubble{
 position:fixed;
 right:18px;
-bottom:22px;
-z-index:200;
+bottom:20px;
+z-index:300;
 width:58px;
 height:58px;
 border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:23px;
-cursor:pointer;
-background:rgba(145,245,201,.15);
-border:1px solid rgba(145,245,201,.38);
-box-shadow:0 12px 35px rgba(0,0,0,.45);
-backdrop-filter:blur(20px);
+border:1px solid rgba(145,245,201,.35);
+background:
+linear-gradient(145deg,
+rgba(255,255,255,.14),
+rgba(145,245,201,.07));
 color:var(--mint);
+box-shadow:
+0 18px 45px rgba(0,0,0,.5),
+inset 0 1px 0 rgba(255,255,255,.18);
+backdrop-filter:blur(25px) saturate(170%);
+-webkit-backdrop-filter:blur(25px) saturate(170%);
+font-size:21px;
+}
+
+.bubble:after{
+content:"";
+position:absolute;
+width:25px;
+height:10px;
+border-radius:50%;
+top:7px;
+left:12px;
+background:rgba(255,255,255,.10);
+filter:blur(5px);
 }
 
 .bubbleMenu{
 position:fixed;
 right:18px;
-bottom:91px;
-z-index:199;
+bottom:88px;
+z-index:299;
 display:none;
 flex-direction:column;
-gap:9px;
+align-items:flex-end;
+gap:8px;
 }
 
-.bubbleMenu.open{display:flex}
+.bubbleMenu.open{
+display:flex;
+}
 
 .bubbleItem{
-background:rgba(12,25,19,.94);
-border:1px solid var(--border);
-backdrop-filter:blur(20px);
-padding:11px 15px;
+border:1px solid rgba(255,255,255,.11);
+background:
+linear-gradient(145deg,
+rgba(255,255,255,.10),
+rgba(10,25,18,.74));
+color:white;
+padding:11px 16px;
 border-radius:999px;
-font-size:13px;
+box-shadow:
+0 15px 35px rgba(0,0,0,.35),
+inset 0 1px 0 rgba(255,255,255,.10);
+backdrop-filter:blur(22px);
+-webkit-backdrop-filter:blur(22px);
+font-size:12px;
 font-weight:800;
-box-shadow:0 10px 30px rgba(0,0,0,.35);
-cursor:pointer;
+white-space:nowrap;
 }
 
+/* =========================
+CATALOGUE
+========================= */
+
 .catalogue{
-padding:38px 0 15px;
+padding:28px 0 12px;
 }
 
 .sectionTop{
 display:flex;
-justify-content:space-between;
 align-items:end;
-margin-bottom:20px;
+justify-content:space-between;
+gap:20px;
+margin-bottom:16px;
 }
 
 .eyebrow{
 color:var(--mint);
-font-size:11px;
-font-weight:950;
-letter-spacing:2px;
-margin-bottom:7px;
+font-size:10px;
+font-weight:800;
+letter-spacing:2.2px;
+margin-bottom:6px;
 }
 
 h2{
-font-size:clamp(28px,5vw,40px);
+font-family:"Manrope",sans-serif;
+font-size:clamp(27px,4vw,39px);
+line-height:1;
 letter-spacing:-1.8px;
-font-weight:950;
+font-weight:800;
 }
 
 .count{
-color:var(--muted);
-font-size:13px;
+color:#74817c;
+font-size:12px;
+}
+
+/* =========================
+GLASS FILTER
+========================= */
+
+.filterGlass{
+padding:8px;
+border:1px solid rgba(255,255,255,.09);
+border-radius:20px;
+background:
+linear-gradient(145deg,
+rgba(255,255,255,.075),
+rgba(255,255,255,.025));
+box-shadow:
+0 15px 45px rgba(0,0,0,.25),
+inset 0 1px 0 rgba(255,255,255,.08);
+backdrop-filter:blur(24px);
+-webkit-backdrop-filter:blur(24px);
+margin-bottom:17px;
 }
 
 .filters{
 display:grid;
 grid-template-columns:1.6fr 1fr 1fr auto;
-gap:9px;
-margin-bottom:20px;
+gap:7px;
 }
 
 .field{
 width:100%;
-padding:14px;
-border-radius:15px;
-border:1px solid var(--border);
-background:var(--surface);
+padding:12px 13px;
+border-radius:13px;
+border:1px solid rgba(255,255,255,.07);
+background:rgba(0,0,0,.20);
 color:white;
 outline:none;
+font-size:12px;
 }
 
-.field::placeholder{color:#718078}
+.field:focus{
+border-color:rgba(145,245,201,.35);
+box-shadow:0 0 0 3px rgba(145,245,201,.05);
+}
+
+.field::placeholder{
+color:#66736d;
+}
+
+select.field{
+appearance:auto;
+}
 
 .reset{
 border:0;
-border-radius:15px;
-padding:0 18px;
+border-radius:13px;
+padding:0 17px;
 background:var(--mint);
 color:#04100a;
-font-weight:900;
-cursor:pointer;
+font-weight:800;
+font-size:12px;
 }
+
+/* =========================
+CAR GRID
+========================= */
 
 .cars{
 display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:17px;
+grid-template-columns:repeat(4,1fr);
+gap:13px;
 }
 
 .car{
-background:linear-gradient(145deg,#0d1b15,#09110e);
-border:1px solid var(--border);
-border-radius:24px;
+position:relative;
 overflow:hidden;
-transition:.25s;
+border:1px solid rgba(255,255,255,.09);
+border-radius:20px;
+background:
+linear-gradient(145deg,
+rgba(255,255,255,.075),
+rgba(8,18,13,.72));
+box-shadow:
+0 14px 40px rgba(0,0,0,.25),
+inset 0 1px 0 rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+transition:.25s ease;
 }
 
 .car:hover{
-transform:translateY(-3px);
+transform:translateY(-4px);
 border-color:rgba(145,245,201,.25);
+box-shadow:
+0 20px 50px rgba(0,0,0,.38),
+0 0 30px rgba(100,230,170,.05);
 }
 
 .photo{
-height:220px;
+height:155px;
 position:relative;
 display:flex;
 align-items:center;
 justify-content:center;
-text-align:center;
-background:
-radial-gradient(circle at 50% 40%,rgba(145,245,201,.16),transparent 42%),
-linear-gradient(135deg,#172c23,#08100d);
-color:#8da097;
-font-size:14px;
-font-weight:900;
 overflow:hidden;
+background:
+radial-gradient(circle at 50% 40%,rgba(145,245,201,.14),transparent 45%),
+linear-gradient(135deg,#15271f,#07100c);
+color:#91a39a;
+font-size:12px;
+font-weight:800;
+}
+
+.photo:after{
+content:"";
+position:absolute;
+top:0;
+left:-40%;
+width:65%;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.055),
+transparent
+);
+transform:skewX(-20deg);
 }
 
 .photo img{
+position:absolute;
+inset:0;
 width:100%;
 height:100%;
 object-fit:cover;
-position:absolute;
-inset:0;
 }
 
 .photoLabel{
 position:relative;
 z-index:2;
+text-align:center;
+line-height:1.5;
 }
 
 .heart{
 position:absolute;
-right:13px;
-top:13px;
 z-index:5;
-width:40px;
-height:40px;
+right:9px;
+top:9px;
+width:34px;
+height:34px;
 border-radius:50%;
-background:rgba(0,0,0,.45);
-border:1px solid rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.12);
+background:rgba(0,0,0,.32);
 color:white;
-cursor:pointer;
-font-size:18px;
+font-size:15px;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 .heart.saved{
 color:var(--mint);
+border-color:rgba(145,245,201,.25);
 }
 
 .info{
-padding:17px;
+padding:13px;
 }
 
 .tag{
 display:inline-block;
-padding:5px 9px;
+padding:4px 7px;
 border-radius:999px;
-background:rgba(145,245,201,.10);
+background:rgba(145,245,201,.08);
+border:1px solid rgba(145,245,201,.10);
 color:var(--mint);
-font-size:10px;
-font-weight:900;
+font-size:8px;
+font-weight:800;
+letter-spacing:.5px;
 }
 
 .car h3{
-font-size:19px;
-margin-top:10px;
-font-weight:900;
+font-family:"Manrope",sans-serif;
+font-size:15px;
+margin-top:8px;
+font-weight:800;
+letter-spacing:-.4px;
 }
 
 .price{
-font-size:22px;
-font-weight:950;
-margin:8px 0;
+font-family:"Manrope",sans-serif;
+font-size:17px;
+font-weight:800;
+margin:6px 0 3px;
 }
 
 .spec{
-color:var(--muted);
-font-size:12px;
+color:#78857f;
+font-size:10px;
 }
 
 .view{
 width:100%;
-margin-top:15px;
-padding:12px;
-border-radius:13px;
-background:var(--surface2);
-border:1px solid var(--border);
+margin-top:11px;
+padding:9px;
+border-radius:11px;
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.08);
 color:white;
-font-weight:900;
-cursor:pointer;
+font-size:11px;
+font-weight:800;
+transition:.2s;
 }
 
+.view:hover{
+background:rgba(145,245,201,.10);
+border-color:rgba(145,245,201,.20);
+}
+
+/* =========================
+HERO
+========================= */
+
 .hero{
-padding:48px 0 25px;
+padding:35px 0 18px;
 }
 
 .heroBox{
 position:relative;
 overflow:hidden;
-padding:52px;
-border-radius:31px;
-border:1px solid var(--border);
+padding:48px;
+border:1px solid rgba(255,255,255,.10);
+border-radius:30px;
 background:
-radial-gradient(circle at 85% 25%,rgba(145,245,201,.18),transparent 30%),
-linear-gradient(135deg,#0d1c15,#07100c);
+radial-gradient(circle at 84% 20%,rgba(145,245,201,.18),transparent 27%),
+radial-gradient(circle at 75% 90%,rgba(80,180,140,.08),transparent 30%),
+linear-gradient(145deg,
+rgba(255,255,255,.075),
+rgba(7,17,12,.88));
+box-shadow:
+0 30px 80px rgba(0,0,0,.36),
+inset 0 1px 0 rgba(255,255,255,.10);
+backdrop-filter:blur(24px);
+-webkit-backdrop-filter:blur(24px);
+}
+
+.heroBox:before{
+content:"";
+position:absolute;
+width:380px;
+height:380px;
+right:-150px;
+top:-180px;
+border-radius:50%;
+border:1px solid rgba(145,245,201,.08);
+box-shadow:
+0 0 0 40px rgba(145,245,201,.025),
+0 0 0 80px rgba(145,245,201,.015);
 }
 
 .hero h1{
 position:relative;
 z-index:2;
-max-width:850px;
-font-size:clamp(43px,8vw,82px);
-line-height:.93;
+max-width:800px;
+font-family:"Manrope",sans-serif;
+font-size:clamp(46px,7vw,78px);
+line-height:.94;
 letter-spacing:-4px;
-font-weight:950;
+font-weight:800;
 }
 
-.hero h1 span{color:var(--mint)}
+.hero h1 span{
+color:var(--mint);
+}
 
 .hero p{
 position:relative;
 z-index:2;
-max-width:650px;
-color:var(--muted);
-font-size:17px;
-line-height:1.6;
-margin:22px 0 27px;
+max-width:610px;
+color:#8f9d97;
+font-size:15px;
+line-height:1.65;
+margin:18px 0 23px;
 }
 
 .heroButtons{
 display:flex;
-gap:10px;
+gap:9px;
 flex-wrap:wrap;
 position:relative;
 z-index:2;
 }
 
 .btn{
-padding:13px 19px;
 border-radius:999px;
-font-weight:900;
-border:1px solid var(--border);
-cursor:pointer;
+padding:12px 18px;
+border:1px solid rgba(255,255,255,.10);
+font-size:12px;
+font-weight:800;
 }
 
 .btnMint{
-background:var(--mint);
+background:linear-gradient(135deg,var(--mint),#70e9b7);
 color:#04100a;
+border-color:rgba(145,245,201,.35);
+box-shadow:0 10px 28px rgba(75,220,160,.12);
 }
 
 .btnDark{
-background:rgba(255,255,255,.04);
+background:rgba(255,255,255,.045);
 color:white;
+backdrop-filter:blur(15px);
 }
 
+/* =========================
+FEATURES
+========================= */
+
 .features{
-padding:40px 0 65px;
+padding:38px 0 55px;
 }
 
 .featureGrid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:17px;
-margin-top:20px;
+gap:13px;
+margin-top:18px;
 }
 
 .feature{
-background:var(--surface);
-border:1px solid var(--border);
-border-radius:22px;
-padding:25px;
+padding:22px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+background:
+linear-gradient(145deg,
+rgba(255,255,255,.065),
+rgba(8,18,13,.65));
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.07);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
 }
 
 .icon{
-font-size:27px;
-margin-bottom:13px;
+width:42px;
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+background:rgba(145,245,201,.08);
+border:1px solid rgba(145,245,201,.12);
+font-size:20px;
+margin-bottom:15px;
 }
 
 .feature h3{
-font-size:18px;
-margin-bottom:8px;
+font-family:"Manrope",sans-serif;
+font-size:16px;
+margin-bottom:7px;
 }
 
 .feature p{
-color:var(--muted);
-font-size:14px;
-line-height:1.5;
+color:#7f8d87;
+font-size:12px;
+line-height:1.55;
 }
 
+/* =========================
+SELL
+========================= */
+
 .sell{
-padding-bottom:65px;
+padding-bottom:60px;
 }
 
 .sellBox{
-padding:32px;
-border-radius:25px;
-background:var(--surface2);
-border:1px solid var(--border);
+position:relative;
+overflow:hidden;
+padding:30px;
+border-radius:23px;
+border:1px solid rgba(255,255,255,.09);
+background:
+linear-gradient(145deg,
+rgba(145,245,201,.075),
+rgba(255,255,255,.025));
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
 }
 
 .sellBox p{
-color:var(--muted);
-max-width:700px;
-margin:10px 0 20px;
+color:#84928c;
+max-width:650px;
+margin:9px 0 18px;
+font-size:13px;
 line-height:1.6;
 }
 
+/* =========================
+FOOTER
+========================= */
+
 footer{
-border-top:1px solid var(--border);
-padding:30px 0;
-color:var(--muted);
-font-size:13px;
+border-top:1px solid rgba(255,255,255,.07);
+padding:25px 0;
+color:#69756f;
+font-size:11px;
 }
 
 .footerRow{
@@ -422,129 +658,123 @@ gap:15px;
 flex-wrap:wrap;
 }
 
+/* =========================
+EMPTY
+========================= */
+
 .empty{
 grid-column:1/-1;
-padding:55px 25px;
+padding:55px 20px;
 text-align:center;
-background:var(--surface);
+border:1px solid rgba(255,255,255,.08);
 border-radius:20px;
-color:var(--muted);
+background:rgba(255,255,255,.035);
 }
 
 .emptyIcon{
-font-size:42px;
-margin-bottom:12px;
+font-size:38px;
+margin-bottom:10px;
 }
 
 .empty h3{
-color:white;
-font-size:21px;
-margin-bottom:7px;
+font-family:"Manrope",sans-serif;
+font-size:19px;
+margin-bottom:6px;
 }
 
-.empty button{
-margin-top:18px;
+.empty p{
+color:var(--muted);
+font-size:12px;
 }
 
-/* MODAL */
+/* =========================
+MODAL
+========================= */
 
 .modal{
 position:fixed;
 inset:0;
 z-index:1000;
-background:rgba(0,0,0,.78);
-backdrop-filter:blur(14px);
 display:flex;
 align-items:center;
 justify-content:center;
-padding:18px;
+padding:16px;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
 overflow-y:auto;
 }
 
 .modalBox{
 width:100%;
 max-width:470px;
-background:#0b1511;
-border:1px solid rgba(145,245,201,.18);
-border-radius:27px;
+max-height:92vh;
+overflow-y:auto;
 padding:25px;
-box-shadow:0 25px 80px rgba(0,0,0,.65);
+border-radius:25px;
+border:1px solid rgba(255,255,255,.12);
+background:
+linear-gradient(145deg,
+rgba(255,255,255,.10),
+rgba(7,16,11,.94));
+box-shadow:
+0 35px 100px rgba(0,0,0,.65),
+inset 0 1px 0 rgba(255,255,255,.10);
+backdrop-filter:blur(30px);
+-webkit-backdrop-filter:blur(30px);
 }
 
 .modalBox h2{
-font-size:30px;
-margin-bottom:8px;
+margin-bottom:7px;
 }
 
 .modalText{
 color:var(--muted);
-font-size:13px;
+font-size:12px;
 line-height:1.5;
-margin-bottom:20px;
+margin-bottom:18px;
 }
 
 .formLabel{
 display:block;
-font-size:12px;
-font-weight:900;
-margin:13px 0 7px;
+font-size:10px;
+font-weight:800;
+margin:12px 0 6px;
+color:#b9c4bf;
 }
 
 .formInput{
 width:100%;
-padding:13px;
-border-radius:13px;
-border:1px solid var(--border);
-background:#101f18;
+padding:12px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.09);
+background:rgba(0,0,0,.22);
 color:white;
 outline:none;
+font-size:12px;
+}
+
+.formInput:focus{
+border-color:rgba(145,245,201,.35);
 }
 
 textarea.formInput{
-min-height:100px;
+min-height:90px;
 resize:vertical;
 }
 
-.modalActions{
-display:flex;
-gap:9px;
-margin-top:20px;
-}
-
-.confirm{
-flex:1;
-background:var(--mint);
-color:#04100a;
-border:0;
-padding:13px;
-border-radius:999px;
-font-weight:950;
-cursor:pointer;
-}
-
-.cancel{
-background:#101f18;
-color:white;
-border:1px solid var(--border);
-padding:13px 18px;
-border-radius:999px;
-font-weight:800;
-cursor:pointer;
-}
-
 .imagePreview{
-width:100%;
-height:170px;
-border-radius:16px;
-border:1px dashed rgba(145,245,201,.3);
-background:#101f18;
+height:150px;
 display:flex;
 align-items:center;
 justify-content:center;
+border-radius:15px;
+border:1px dashed rgba(145,245,201,.22);
+background:rgba(0,0,0,.18);
+color:#66736d;
+font-size:11px;
 overflow:hidden;
-color:var(--muted);
-font-size:13px;
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
 .imagePreview img{
@@ -553,28 +783,68 @@ height:100%;
 object-fit:cover;
 }
 
+.modalActions{
+display:flex;
+gap:8px;
+margin-top:18px;
+}
+
+.confirm{
+flex:1;
+border:0;
+padding:12px;
+border-radius:999px;
+background:var(--mint);
+color:#04100a;
+font-weight:800;
+font-size:12px;
+}
+
+.cancel{
+border:1px solid rgba(255,255,255,.09);
+padding:12px 17px;
+border-radius:999px;
+background:rgba(255,255,255,.04);
+color:white;
+font-weight:700;
+font-size:12px;
+}
+
 .success{
 text-align:center;
-padding:15px 0 5px;
+padding:10px 0 3px;
 }
 
 .successIcon{
-font-size:45px;
+font-size:42px;
 color:var(--mint);
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
 .success p{
 color:var(--muted);
+font-size:12px;
 line-height:1.6;
-font-size:14px;
+margin-top:8px;
 }
 
-/* MOBILE */
+/* =========================
+MOBILE
+========================= */
 
-@media(max-width:850px){
+@media(max-width:1050px){
 
-.navlinks{display:none}
+.cars{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+@media(max-width:800px){
+
+.navlinks{
+display:none;
+}
 
 .cars{
 grid-template-columns:repeat(2,1fr);
@@ -589,7 +859,7 @@ grid-template-columns:1fr;
 }
 
 .heroBox{
-padding:34px 25px;
+padding:38px 28px;
 }
 
 }
@@ -601,20 +871,28 @@ width:94%;
 }
 
 .nav{
-height:65px;
+height:58px;
 }
 
 .logo{
-font-size:21px;
+font-size:20px;
 }
 
 .sellBtn{
-padding:10px 14px;
-font-size:12px;
+padding:9px 13px;
+font-size:11px;
 }
 
-.cars{
-grid-template-columns:1fr;
+.catalogue{
+padding-top:22px;
+}
+
+.sectionTop{
+align-items:flex-end;
+}
+
+h2{
+font-size:27px;
 }
 
 .filters{
@@ -622,37 +900,69 @@ grid-template-columns:1fr;
 }
 
 .reset{
-height:47px;
+height:42px;
+}
+
+.cars{
+grid-template-columns:repeat(2,1fr);
+gap:9px;
+}
+
+.photo{
+height:120px;
+}
+
+.info{
+padding:10px;
+}
+
+.car h3{
+font-size:13px;
+}
+
+.price{
+font-size:14px;
+}
+
+.spec{
+font-size:9px;
+}
+
+.view{
+font-size:10px;
+padding:8px;
 }
 
 .hero{
-padding-top:30px;
+padding-top:28px;
 }
 
 .heroBox{
-padding:31px 22px;
-border-radius:25px;
+padding:31px 21px;
+border-radius:24px;
 }
 
 .hero h1{
 font-size:48px;
-letter-spacing:-2.5px;
+letter-spacing:-2.7px;
 }
 
 .hero p{
-font-size:15px;
+font-size:13px;
 }
 
-.sectionTop{
-align-items:start;
+.feature{
+padding:19px;
 }
 
-h2{
-font-size:29px;
+.bubble{
+right:14px;
+bottom:17px;
 }
 
-.modalBox{
-padding:21px;
+.bubbleMenu{
+right:14px;
+bottom:83px;
 }
 
 }
@@ -682,7 +992,7 @@ Sell a car
 </header>
 
 
-<!-- GLASS MENU -->
+<!-- LIQUID GLASS MENU -->
 
 <div class="bubbleMenu" id="bubbleMenu">
 
@@ -709,8 +1019,6 @@ Sell a car
 
 <main id="mainContent">
 
-<!-- CATALOGUE -->
-
 <section class="catalogue" id="cars">
 
 <div class="container">
@@ -726,6 +1034,8 @@ Sell a car
 
 </div>
 
+
+<div class="filterGlass">
 
 <div class="filters">
 
@@ -752,9 +1062,14 @@ placeholder="Search make, model or year"
 <option>Pickup</option>
 </select>
 
-<button class="reset" onclick="resetFilters()">Reset</button>
+<button class="reset" onclick="resetFilters()">
+Reset
+</button>
 
 </div>
+
+</div>
+
 
 <div class="cars" id="cars"></div>
 
@@ -763,15 +1078,15 @@ placeholder="Search make, model or year"
 </section>
 
 
-<!-- HERO -->
-
 <section class="hero">
 
 <div class="container">
 
 <div class="heroBox">
 
-<div class="eyebrow">WELCOME TO CARHUB AFRICA</div>
+<div class="eyebrow">
+WELCOME TO CARHUB AFRICA
+</div>
 
 <h1>
 Buy. Sell.
@@ -803,40 +1118,54 @@ Sell your car
 </section>
 
 
-<!-- FEATURES -->
-
 <section class="features" id="features">
 
 <div class="container">
 
-<div class="eyebrow">CARHUB AFRICA</div>
+<div class="eyebrow">
+CARHUB AFRICA
+</div>
 
 <h2>Everything in one place</h2>
 
 <div class="featureGrid">
 
 <div class="feature">
-<div class="icon">🔎</div>
+
+<div class="icon">⌕</div>
+
 <h3>Smart discovery</h3>
+
 <p>
-Search and filter vehicles quickly to find what you're looking for.
+Search and filter vehicles quickly to find exactly what you're looking for.
 </p>
+
 </div>
 
+
 <div class="feature">
+
 <div class="icon">✓</div>
+
 <h3>Buy with confidence</h3>
+
 <p>
-Find vehicle information and connect directly with sellers.
+Explore vehicle information and connect directly with sellers.
 </p>
+
 </div>
 
+
 <div class="feature">
+
 <div class="icon">＋</div>
+
 <h3>Sell your car</h3>
+
 <p>
-Create your listing and reach buyers through CarHub Africa.
+Create a professional listing and reach buyers through CarHub Africa.
 </p>
+
 </div>
 
 </div>
@@ -846,15 +1175,15 @@ Create your listing and reach buyers through CarHub Africa.
 </section>
 
 
-<!-- SELL -->
-
 <section class="sell" id="sell">
 
 <div class="container">
 
 <div class="sellBox">
 
-<div class="eyebrow">SELL ON CARHUB</div>
+<div class="eyebrow">
+SELL ON CARHUB
+</div>
 
 <h2>Ready to sell your car?</h2>
 
@@ -962,7 +1291,6 @@ image:""
 
 ];
 
-
 let userVehicles=JSON.parse(
 localStorage.getItem("carhubUserVehicles")||"[]"
 );
@@ -976,22 +1304,11 @@ let saved=JSON.parse(
 localStorage.getItem("carhubSaved")||"[]"
 );
 
-
 function render(){
 
-const search=document
-.getElementById("search")
-.value
-.toLowerCase();
-
-const make=document
-.getElementById("make")
-.value;
-
-const type=document
-.getElementById("type")
-.value;
-
+const search=document.getElementById("search").value.toLowerCase();
+const make=document.getElementById("make").value;
+const type=document.getElementById("type").value;
 
 const list=vehicles.filter(car=>{
 
@@ -1009,10 +1326,8 @@ return(
 
 });
 
-
 document.getElementById("count").textContent=
 list.length+" vehicles";
-
 
 document.getElementById("cars").innerHTML=
 
@@ -1024,7 +1339,8 @@ list.length
 
 <div class="photo">
 
-${car.image
+${
+car.image
 ?`<img src="${car.image}" alt="${car.make} ${car.model}">`
 :`<div class="photoLabel">${car.make}<br>${car.model}</div>`
 }
@@ -1045,9 +1361,13 @@ onclick="saveCar('${car.id}')">
 ${car.year} ${car.make} ${car.model}
 </h3>
 
-<div class="price">${car.price}</div>
+<div class="price">
+${car.price}
+</div>
 
-<div class="spec">${car.spec}</div>
+<div class="spec">
+${car.spec}
+</div>
 
 <button
 class="view"
@@ -1063,7 +1383,11 @@ View vehicle
 
 :
 
-'<div class="empty"><div class="emptyIcon">🚗</div><h3>No vehicles found</h3><p>Try another search or filter.</p></div>';
+`<div class="empty">
+<div class="emptyIcon">🚗</div>
+<h3>No vehicles found</h3>
+<p>Try another search or filter.</p>
+</div>`;
 
 }
 
@@ -1101,8 +1425,13 @@ document.getElementById("mainContent").innerHTML=`
 <div class="sectionTop">
 
 <div>
-<div class="eyebrow">YOUR GARAGE</div>
+
+<div class="eyebrow">
+YOUR GARAGE
+</div>
+
 <h2>Saved cars</h2>
+
 </div>
 
 <div class="count">
@@ -1110,6 +1439,7 @@ ${savedVehicles.length} saved
 </div>
 
 </div>
+
 
 ${
 savedVehicles.length
@@ -1124,7 +1454,8 @@ ${savedVehicles.map(car=>`
 
 <div class="photo">
 
-${car.image
+${
+car.image
 ?`<img src="${car.image}" alt="${car.make} ${car.model}">`
 :`<div class="photoLabel">${car.make}<br>${car.model}</div>`
 }
@@ -1139,15 +1470,21 @@ onclick="saveCar('${car.id}');showSaved()">
 
 <div class="info">
 
-<span class="tag">${car.type}</span>
+<span class="tag">
+${car.type}
+</span>
 
 <h3>
 ${car.year} ${car.make} ${car.model}
 </h3>
 
-<div class="price">${car.price}</div>
+<div class="price">
+${car.price}
+</div>
 
-<div class="spec">${car.spec}</div>
+<div class="spec">
+${car.spec}
+</div>
 
 <button
 class="view"
@@ -1182,7 +1519,6 @@ Browse cars
 </button>
 
 </div>`
-
 }
 
 </div>
@@ -1196,9 +1532,7 @@ window.scrollTo(0,0);
 
 
 function showHome(){
-
 location.reload();
-
 }
 
 
@@ -1223,32 +1557,34 @@ document.body.innerHTML=`
 
 <div style="
 min-height:100vh;
-background:#050b08;
+background:#040806;
 color:#f7faf8;
-font-family:Arial,Helvetica,sans-serif;
-padding:20px;
+font-family:'DM Sans',Arial,sans-serif;
+padding:18px;
 ">
 
 <div style="max-width:900px;margin:auto">
 
 <button onclick="location.reload()" style="
-border:1px solid rgba(255,255,255,.1);
-background:#0b1511;
+border:1px solid rgba(255,255,255,.10);
+background:rgba(255,255,255,.06);
 color:white;
 padding:11px 17px;
 border-radius:999px;
-font-weight:900;
+font-weight:800;
 cursor:pointer;
-margin-bottom:20px;
+margin-bottom:18px;
+backdrop-filter:blur(20px);
 ">
 ← Back to cars
 </button>
 
 <div style="
-background:#0b1511;
-border:1px solid rgba(255,255,255,.09);
+background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(7,16,11,.9));
+border:1px solid rgba(255,255,255,.10);
 border-radius:28px;
 overflow:hidden;
+box-shadow:0 30px 90px rgba(0,0,0,.55);
 ">
 
 <div style="
@@ -1258,15 +1594,16 @@ align-items:center;
 justify-content:center;
 text-align:center;
 background:
-radial-gradient(circle at 50% 40%,rgba(145,245,201,.18),transparent 42%),
+radial-gradient(circle at 50% 40%,rgba(145,245,201,.17),transparent 42%),
 linear-gradient(135deg,#172c23,#08100d);
 color:#91f5c9;
 font-size:28px;
-font-weight:950;
+font-weight:800;
 overflow:hidden;
 ">
 
-${car.image
+${
+car.image
 ?`<img src="${car.image}" style="width:100%;height:100%;object-fit:cover">`
 :`${car.make}<br>${car.model}`
 }
@@ -1277,25 +1614,27 @@ ${car.image
 
 <div style="
 color:#91f5c9;
-font-size:11px;
-font-weight:950;
+font-size:10px;
+font-weight:800;
 letter-spacing:2px;
-margin-bottom:8px;
+margin-bottom:7px;
 ">
 VEHICLE DETAILS
 </div>
 
 <h1 style="
-font-size:38px;
+font-family:'Manrope',sans-serif;
+font-size:36px;
 letter-spacing:-2px;
-margin-bottom:10px;
+margin-bottom:8px;
 ">
 ${car.year} ${car.make} ${car.model}
 </h1>
 
 <div style="
-font-size:28px;
-font-weight:950;
+font-family:'Manrope',sans-serif;
+font-size:26px;
+font-weight:800;
 margin-bottom:20px;
 ">
 ${car.price}
@@ -1304,57 +1643,42 @@ ${car.price}
 <div style="
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:10px;
+gap:9px;
 ">
 
-<div style="background:#101f18;padding:16px;border-radius:15px">
-<strong>Type</strong><br>
-<span style="color:#93a29b">${car.type}</span>
-</div>
-
-<div style="background:#101f18;padding:16px;border-radius:15px">
-<strong>Transmission</strong><br>
-<span style="color:#93a29b">Automatic</span>
-</div>
-
-<div style="background:#101f18;padding:16px;border-radius:15px">
-<strong>Fuel</strong><br>
-<span style="color:#93a29b">Petrol</span>
-</div>
-
-<div style="background:#101f18;padding:16px;border-radius:15px">
-<strong>Location</strong><br>
-<span style="color:#93a29b">${car.location||"Nigeria"}</span>
-</div>
+${detailBox("Type",car.type)}
+${detailBox("Transmission","Automatic")}
+${detailBox("Fuel","Petrol")}
+${detailBox("Location",car.location||"Nigeria")}
 
 </div>
 
 <div style="
 display:flex;
-gap:10px;
+gap:9px;
 flex-wrap:wrap;
-margin-top:25px;
+margin-top:23px;
 ">
 
 <button onclick="openInspection()" style="
 background:#91f5c9;
 color:#04100a;
 border:0;
-padding:14px 20px;
+padding:13px 19px;
 border-radius:999px;
-font-weight:950;
+font-weight:800;
 cursor:pointer;
 ">
 Book inspection
 </button>
 
 <button onclick="alert('Seller contact will be connected to the CarHub messaging system next.')" style="
-background:#101f18;
+background:rgba(255,255,255,.05);
 color:white;
-border:1px solid rgba(255,255,255,.1);
-padding:14px 20px;
+border:1px solid rgba(255,255,255,.10);
+padding:13px 19px;
 border-radius:999px;
-font-weight:950;
+font-weight:800;
 cursor:pointer;
 ">
 Contact seller
@@ -1372,6 +1696,23 @@ Contact seller
 }
 
 
+function detailBox(title,value){
+
+return `
+<div style="
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.07);
+padding:15px;
+border-radius:14px;
+">
+<strong style="font-size:12px">${title}</strong><br>
+<span style="color:#84928c;font-size:11px">${value}</span>
+</div>
+`;
+
+}
+
+
 function openInspection(){
 
 const modal=document.createElement("div");
@@ -1382,15 +1723,21 @@ modal.innerHTML=`
 
 <div class="modalBox">
 
-<div class="eyebrow">CARHUB INSPECTION</div>
+<div class="eyebrow">
+CARHUB INSPECTION
+</div>
 
-<h2>Book an inspection</h2>
+<h2>
+Book an inspection
+</h2>
 
 <p class="modalText">
 Choose a convenient date and time for your vehicle inspection.
 </p>
 
-<label class="formLabel">Inspection date</label>
+<label class="formLabel">
+Inspection date
+</label>
 
 <input
 id="inspectionDate"
@@ -1399,7 +1746,9 @@ type="date"
 min="${new Date().toISOString().split("T")[0]}"
 >
 
-<label class="formLabel">Inspection time</label>
+<label class="formLabel">
+Inspection time
+</label>
 
 <select id="inspectionTime" class="formInput">
 
@@ -1415,7 +1764,9 @@ min="${new Date().toISOString().split("T")[0]}"
 
 </select>
 
-<label class="formLabel">Your name</label>
+<label class="formLabel">
+Your name
+</label>
 
 <input
 id="buyerName"
@@ -1424,7 +1775,9 @@ type="text"
 placeholder="Enter your name"
 >
 
-<label class="formLabel">Phone number</label>
+<label class="formLabel">
+Phone number
+</label>
 
 <input
 id="buyerPhone"
@@ -1485,11 +1838,17 @@ modal.innerHTML=`
 
 <div class="success">
 
-<div class="successIcon">✓</div>
+<div class="successIcon">
+✓
+</div>
 
-<div class="eyebrow">BOOKING RECEIVED</div>
+<div class="eyebrow">
+BOOKING RECEIVED
+</div>
 
-<h2>Inspection requested</h2>
+<h2>
+Inspection requested
+</h2>
 
 <p>
 Thank you, ${name}. Your inspection request has been recorded.
@@ -1516,6 +1875,9 @@ Done
 }
 
 
+let selectedCarImage="";
+
+
 function startSelling(){
 
 const modal=document.createElement("div");
@@ -1526,15 +1888,21 @@ modal.innerHTML=`
 
 <div class="modalBox">
 
-<div class="eyebrow">SELL ON CARHUB AFRICA</div>
+<div class="eyebrow">
+SELL ON CARHUB AFRICA
+</div>
 
-<h2>Create your listing</h2>
+<h2>
+Create your listing
+</h2>
 
 <p class="modalText">
 Add your vehicle information and publish it to the CarHub catalogue.
 </p>
 
-<label class="formLabel">Vehicle photo</label>
+<label class="formLabel">
+Vehicle photo
+</label>
 
 <div class="imagePreview" id="imagePreview">
 <span>Choose a photo of your car</span>
@@ -1548,7 +1916,9 @@ accept="image/*"
 onchange="previewCarImage(event)"
 >
 
-<label class="formLabel">Make</label>
+<label class="formLabel">
+Make
+</label>
 
 <select id="sellMake" class="formInput">
 
@@ -1563,7 +1933,9 @@ onchange="previewCarImage(event)"
 
 </select>
 
-<label class="formLabel">Model</label>
+<label class="formLabel">
+Model
+</label>
 
 <input
 id="sellModel"
@@ -1572,7 +1944,9 @@ type="text"
 placeholder="e.g. Camry XLE"
 >
 
-<label class="formLabel">Year</label>
+<label class="formLabel">
+Year
+</label>
 
 <input
 id="sellYear"
@@ -1583,7 +1957,9 @@ min="1900"
 max="2030"
 >
 
-<label class="formLabel">Price</label>
+<label class="formLabel">
+Price
+</label>
 
 <input
 id="sellPrice"
@@ -1592,7 +1968,9 @@ type="text"
 placeholder="e.g. ₦35,000,000"
 >
 
-<label class="formLabel">Vehicle type</label>
+<label class="formLabel">
+Vehicle type
+</label>
 
 <select id="sellType" class="formInput">
 
@@ -1603,7 +1981,9 @@ placeholder="e.g. ₦35,000,000"
 
 </select>
 
-<label class="formLabel">Location</label>
+<label class="formLabel">
+Location
+</label>
 
 <input
 id="sellLocation"
@@ -1612,7 +1992,9 @@ type="text"
 placeholder="e.g. Abuja, Nigeria"
 >
 
-<label class="formLabel">Description</label>
+<label class="formLabel">
+Description
+</label>
 
 <textarea
 id="sellDescription"
@@ -1638,9 +2020,6 @@ Cancel
 document.body.appendChild(modal);
 
 }
-
-
-let selectedCarImage="";
 
 
 function previewCarImage(event){
@@ -1727,11 +2106,17 @@ modal.innerHTML=`
 
 <div class="success">
 
-<div class="successIcon">✓</div>
+<div class="successIcon">
+✓
+</div>
 
-<div class="eyebrow">LISTING PUBLISHED</div>
+<div class="eyebrow">
+LISTING PUBLISHED
+</div>
 
-<h2>Your car is live</h2>
+<h2>
+Your car is live
+</h2>
 
 <p>
 Your ${year} ${make} ${model} has been added to the CarHub Africa catalogue.
