@@ -930,10 +930,176 @@ render();
 
 function viewCar(name){
 
-alert(
-name+
-" details will be connected to the vehicle page next."
+const car = vehicles.find(
+v => `${v.make} ${v.model}` === name
 );
+
+if(!car) return;
+
+document.body.innerHTML = `
+
+<div style="
+min-height:100vh;
+background:#050b08;
+color:#f7faf8;
+font-family:Arial,Helvetica,sans-serif;
+padding:20px;
+">
+
+<div style="
+max-width:900px;
+margin:auto;
+">
+
+<button onclick="location.reload()" style="
+border:1px solid rgba(255,255,255,.1);
+background:#0b1511;
+color:white;
+padding:11px 17px;
+border-radius:999px;
+font-weight:900;
+cursor:pointer;
+margin-bottom:20px;
+">
+← Back to cars
+</button>
+
+<div style="
+background:#0b1511;
+border:1px solid rgba(255,255,255,.09);
+border-radius:28px;
+overflow:hidden;
+">
+
+<div style="
+height:330px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:
+radial-gradient(circle at 50% 40%,rgba(145,245,201,.18),transparent 42%),
+linear-gradient(135deg,#172c23,#08100d);
+color:#91f5c9;
+font-size:28px;
+font-weight:950;
+">
+
+${car.make}<br>${car.model}
+
+</div>
+
+<div style="padding:25px">
+
+<div style="
+color:#91f5c9;
+font-size:11px;
+font-weight:950;
+letter-spacing:2px;
+margin-bottom:8px;
+">
+VEHICLE DETAILS
+</div>
+
+<h1 style="
+font-size:38px;
+letter-spacing:-2px;
+margin-bottom:10px;
+">
+${car.year} ${car.make} ${car.model}
+</h1>
+
+<div style="
+font-size:28px;
+font-weight:950;
+margin-bottom:20px;
+">
+${car.price}
+</div>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+">
+
+<div style="
+background:#101f18;
+padding:16px;
+border-radius:15px;
+">
+<strong>Type</strong><br>
+<span style="color:#93a29b">${car.type}</span>
+</div>
+
+<div style="
+background:#101f18;
+padding:16px;
+border-radius:15px;
+">
+<strong>Transmission</strong><br>
+<span style="color:#93a29b">Automatic</span>
+</div>
+
+<div style="
+background:#101f18;
+padding:16px;
+border-radius:15px;
+">
+<strong>Fuel</strong><br>
+<span style="color:#93a29b">Petrol</span>
+</div>
+
+<div style="
+background:#101f18;
+padding:16px;
+border-radius:15px;
+">
+<strong>Location</strong><br>
+<span style="color:#93a29b">Nigeria</span>
+</div>
+
+</div>
+
+<div style="
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:25px;
+">
+
+<button onclick="alert('Inspection booking will be connected next.')" style="
+background:#91f5c9;
+color:#04100a;
+border:0;
+padding:14px 20px;
+border-radius:999px;
+font-weight:950;
+cursor:pointer;
+">
+Book inspection
+</button>
+
+<button onclick="alert('Seller contact will be connected next.')" style="
+background:#101f18;
+color:white;
+border:1px solid rgba(255,255,255,.1);
+padding:14px 20px;
+border-radius:999px;
+font-weight:950;
+cursor:pointer;
+">
+Contact seller
+</button>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+`;
 
 }
 
