@@ -28,7 +28,7 @@ min-height:100vh;
 }
 
 a{text-decoration:none;color:inherit}
-button,input,select{font:inherit}
+button,input,select,textarea{font:inherit}
 
 .container{
 width:92%;
@@ -76,6 +76,7 @@ color:#04100a;
 padding:11px 18px;
 border-radius:999px;
 font-weight:900;
+cursor:pointer;
 }
 
 .bubble{
@@ -111,7 +112,7 @@ gap:9px;
 .bubbleMenu.open{display:flex}
 
 .bubbleItem{
-background:rgba(12,25,19,.88);
+background:rgba(12,25,19,.92);
 border:1px solid var(--border);
 backdrop-filter:blur(20px);
 padding:11px 15px;
@@ -119,6 +120,7 @@ border-radius:999px;
 font-size:13px;
 font-weight:800;
 box-shadow:0 10px 30px rgba(0,0,0,.35);
+cursor:pointer;
 }
 
 .catalogue{
@@ -212,16 +214,31 @@ linear-gradient(135deg,#172c23,#08100d);
 color:#8da097;
 font-size:14px;
 font-weight:900;
+overflow:hidden;
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+position:absolute;
+inset:0;
+}
+
+.photoLabel{
+position:relative;
+z-index:2;
 }
 
 .heart{
 position:absolute;
 right:13px;
 top:13px;
+z-index:5;
 width:40px;
 height:40px;
 border-radius:50%;
-background:rgba(0,0,0,.35);
+background:rgba(0,0,0,.45);
 border:1px solid rgba(255,255,255,.1);
 color:white;
 cursor:pointer;
@@ -284,18 +301,6 @@ border:1px solid var(--border);
 background:
 radial-gradient(circle at 85% 25%,rgba(145,245,201,.18),transparent 30%),
 linear-gradient(135deg,#0d1c15,#07100c);
-}
-
-.heroBox:after{
-content:"";
-position:absolute;
-width:280px;
-height:280px;
-right:-100px;
-bottom:-150px;
-border-radius:50%;
-background:rgba(145,245,201,.08);
-filter:blur(10px);
 }
 
 .hero h1{
@@ -421,23 +426,24 @@ border-radius:20px;
 color:var(--muted);
 }
 
-/* INSPECTION MODAL */
+/* MODALS */
 
 .modal{
 position:fixed;
 inset:0;
 z-index:1000;
-background:rgba(0,0,0,.75);
+background:rgba(0,0,0,.78);
 backdrop-filter:blur(14px);
 display:flex;
 align-items:center;
 justify-content:center;
 padding:18px;
+overflow-y:auto;
 }
 
 .modalBox{
 width:100%;
-max-width:440px;
+max-width:470px;
 background:#0b1511;
 border:1px solid rgba(145,245,201,.18);
 border-radius:27px;
@@ -474,6 +480,11 @@ color:white;
 outline:none;
 }
 
+textarea.formInput{
+min-height:100px;
+resize:vertical;
+}
+
 .modalActions{
 display:flex;
 gap:9px;
@@ -499,6 +510,27 @@ padding:13px 18px;
 border-radius:999px;
 font-weight:800;
 cursor:pointer;
+}
+
+.imagePreview{
+width:100%;
+height:170px;
+border-radius:16px;
+border:1px dashed rgba(145,245,201,.3);
+background:#101f18;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+color:var(--muted);
+font-size:13px;
+margin-bottom:10px;
+}
+
+.imagePreview img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 .success{
@@ -604,7 +636,7 @@ CarHub <span>Africa</span>
 <a href="#sell">Sell</a>
 </nav>
 
-<a class="sellBtn" href="#sell">Sell a car</a>
+<button class="sellBtn" onclick="startSelling()">Sell a car</button>
 
 </div>
 </header>
@@ -613,7 +645,7 @@ CarHub <span>Africa</span>
 <div class="bubbleMenu" id="bubbleMenu">
 
 <a class="bubbleItem" href="#cars">🚗 Browse cars</a>
-<a class="bubbleItem" href="#sell">＋ Sell a car</a>
+<a class="bubbleItem" href="#sell" onclick="startSelling();return false">＋ Sell a car</a>
 <a class="bubbleItem" href="#features">✦ Features</a>
 
 </div>
@@ -637,6 +669,7 @@ CarHub <span>Africa</span>
 <div class="count" id="count"></div>
 
 </div>
+
 
 <div class="filters">
 
@@ -697,7 +730,9 @@ car move with confidence.
 
 <a class="btn btnMint" href="#cars">Browse cars</a>
 
-<a class="btn btnDark" href="#sell">Sell your car</a>
+<button class="btn btnDark" onclick="startSelling()">
+Sell your car
+</button>
 
 </div>
 
@@ -787,65 +822,89 @@ CarHub <span style="color:#91f5c9">Africa</span>
 
 <script>
 
-const vehicles=[
+const defaultVehicles=[
 
 {
+id:"1",
 make:"Toyota",
 model:"Land Cruiser",
 year:2022,
 price:"₦78,000,000",
 type:"SUV",
-spec:"Automatic • Petrol"
+spec:"Automatic • Petrol",
+image:""
 },
 
 {
+id:"2",
 make:"Lexus",
 model:"RX 350",
 year:2021,
 price:"₦52,000,000",
 type:"SUV",
-spec:"Automatic • Petrol"
+spec:"Automatic • Petrol",
+image:""
 },
 
 {
+id:"3",
 make:"Mercedes-Benz",
 model:"C300",
 year:2020,
 price:"₦38,500,000",
 type:"Sedan",
-spec:"Automatic • Petrol"
+spec:"Automatic • Petrol",
+image:""
 },
 
 {
+id:"4",
 make:"Honda",
 model:"CR-V",
 year:2022,
 price:"₦31,000,000",
 type:"SUV",
-spec:"Automatic • Petrol"
+spec:"Automatic • Petrol",
+image:""
 },
 
 {
+id:"5",
 make:"BMW",
 model:"X5",
 year:2021,
 price:"₦60,000,000",
 type:"SUV",
-spec:"Automatic • Petrol"
+spec:"Automatic • Petrol",
+image:""
 },
 
 {
+id:"6",
 make:"Hyundai",
 model:"Tucson",
 year:2023,
 price:"₦29,500,000",
 type:"SUV",
-spec:"Automatic • Petrol"
+spec:"Automatic • Petrol",
+image:""
 }
 
 ];
 
-let saved=[];
+
+let userVehicles=JSON.parse(
+localStorage.getItem("carhubUserVehicles")||"[]"
+);
+
+let vehicles=[
+...defaultVehicles,
+...userVehicles
+];
+
+let saved=JSON.parse(
+localStorage.getItem("carhubSaved")||"[]"
+);
 
 
 function render(){
@@ -863,6 +922,7 @@ const type=document
 .getElementById("type")
 .value;
 
+
 const list=vehicles.filter(car=>{
 
 const text=(
@@ -879,24 +939,29 @@ return(
 
 });
 
+
 document.getElementById("count").textContent=
 list.length+" vehicles";
+
 
 document.getElementById("cars").innerHTML=
 
 list.length
 
-?list.map((car,index)=>`
+?list.map(car=>`
 
 <article class="car">
 
 <div class="photo">
 
-${car.make}<br>${car.model}
+${car.image
+?`<img src="${car.image}" alt="${car.make} ${car.model}">`
+:`<div class="photoLabel">${car.make}<br>${car.model}</div>`
+}
 
 <button
-class="heart ${saved.includes(index)?"saved":""}"
-onclick="saveCar(${index})">
+class="heart ${saved.includes(car.id)?"saved":""}"
+onclick="saveCar('${car.id}')">
 ♥
 </button>
 
@@ -916,7 +981,7 @@ ${car.year} ${car.make} ${car.model}
 
 <button
 class="view"
-onclick="viewCar('${car.make} ${car.model}')">
+onclick="viewCar('${car.id}')">
 View vehicle
 </button>
 
@@ -933,13 +998,18 @@ View vehicle
 }
 
 
-function saveCar(index){
+function saveCar(id){
 
-if(saved.includes(index)){
-saved=saved.filter(i=>i!==index);
+if(saved.includes(id)){
+saved=saved.filter(i=>i!==id);
 }else{
-saved.push(index);
+saved.push(id);
 }
+
+localStorage.setItem(
+"carhubSaved",
+JSON.stringify(saved)
+);
 
 render();
 
@@ -957,11 +1027,9 @@ render();
 }
 
 
-function viewCar(name){
+function viewCar(id){
 
-const car=vehicles.find(
-v=>`${v.make} ${v.model}`===name
-);
+const car=vehicles.find(v=>v.id===id);
 
 if(!car)return;
 
@@ -1009,9 +1077,13 @@ linear-gradient(135deg,#172c23,#08100d);
 color:#91f5c9;
 font-size:28px;
 font-weight:950;
+overflow:hidden;
 ">
 
-${car.make}<br>${car.model}
+${car.image
+?`<img src="${car.image}" style="width:100%;height:100%;object-fit:cover">`
+:`${car.make}<br>${car.model}`
+}
 
 </div>
 
@@ -1066,7 +1138,7 @@ gap:10px;
 
 <div style="background:#101f18;padding:16px;border-radius:15px">
 <strong>Location</strong><br>
-<span style="color:#93a29b">Nigeria</span>
+<span style="color:#93a29b">${car.location||"Nigeria"}</span>
 </div>
 
 </div>
@@ -1090,7 +1162,7 @@ cursor:pointer;
 Book inspection
 </button>
 
-<button onclick="alert('Seller contact will be connected next.')" style="
+<button onclick="alert('Seller contact will be connected to the CarHub messaging system next.')" style="
 background:#101f18;
 color:white;
 border:1px solid rgba(255,255,255,.1);
@@ -1260,9 +1332,239 @@ Done
 
 function startSelling(){
 
-alert(
-"The seller listing system will be connected next."
+const modal=document.createElement("div");
+
+modal.className="modal";
+
+modal.innerHTML=`
+
+<div class="modalBox">
+
+<div class="eyebrow">SELL ON CARHUB AFRICA</div>
+
+<h2>Create your listing</h2>
+
+<p class="modalText">
+Add your vehicle information and publish it to the CarHub catalogue.
+</p>
+
+<label class="formLabel">Vehicle photo</label>
+
+<div class="imagePreview" id="imagePreview">
+<span>Choose a photo of your car</span>
+</div>
+
+<input
+id="carImage"
+class="formInput"
+type="file"
+accept="image/*"
+onchange="previewCarImage(event)"
+>
+
+<label class="formLabel">Make</label>
+
+<select id="sellMake" class="formInput">
+
+<option value="">Select make</option>
+<option>Toyota</option>
+<option>Lexus</option>
+<option>Mercedes-Benz</option>
+<option>Honda</option>
+<option>BMW</option>
+<option>Hyundai</option>
+<option>Other</option>
+
+</select>
+
+<label class="formLabel">Model</label>
+
+<input
+id="sellModel"
+class="formInput"
+type="text"
+placeholder="e.g. Camry XLE"
+>
+
+<label class="formLabel">Year</label>
+
+<input
+id="sellYear"
+class="formInput"
+type="number"
+placeholder="e.g. 2022"
+min="1900"
+max="2030"
+>
+
+<label class="formLabel">Price</label>
+
+<input
+id="sellPrice"
+class="formInput"
+type="text"
+placeholder="e.g. ₦35,000,000"
+>
+
+<label class="formLabel">Vehicle type</label>
+
+<select id="sellType" class="formInput">
+
+<option value="">Select type</option>
+<option>SUV</option>
+<option>Sedan</option>
+<option>Pickup</option>
+
+</select>
+
+<label class="formLabel">Location</label>
+
+<input
+id="sellLocation"
+class="formInput"
+type="text"
+placeholder="e.g. Abuja, Nigeria"
+>
+
+<label class="formLabel">Description</label>
+
+<textarea
+id="sellDescription"
+class="formInput"
+placeholder="Tell buyers about your car..."
+></textarea>
+
+<div class="modalActions">
+
+<button class="confirm" onclick="publishListing()">
+Publish listing
+</button>
+
+<button class="cancel" onclick="closeSelling()">
+Cancel
+</button>
+
+</div>
+
+</div>
+`;
+
+document.body.appendChild(modal);
+
+}
+
+
+let selectedCarImage="";
+
+
+function previewCarImage(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+selectedCarImage=e.target.result;
+
+document.getElementById("imagePreview").innerHTML=
+`<img src="${selectedCarImage}" alt="Car preview">`;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+function closeSelling(){
+
+const modal=document.querySelector(".modal");
+
+if(modal)modal.remove();
+
+}
+
+
+function publishListing(){
+
+const make=document.getElementById("sellMake").value;
+const model=document.getElementById("sellModel").value.trim();
+const year=document.getElementById("sellYear").value;
+const price=document.getElementById("sellPrice").value.trim();
+const type=document.getElementById("sellType").value;
+const location=document.getElementById("sellLocation").value.trim();
+const description=document.getElementById("sellDescription").value.trim();
+
+if(!make||!model||!year||!price||!type||!location){
+
+alert("Please complete all required vehicle details.");
+
+return;
+
+}
+
+const newVehicle={
+
+id:"user-"+Date.now(),
+make,
+model,
+year,
+price,
+type,
+spec:"Automatic • Petrol",
+location,
+description,
+image:selectedCarImage
+
+};
+
+
+userVehicles.push(newVehicle);
+
+localStorage.setItem(
+"carhubUserVehicles",
+JSON.stringify(userVehicles)
 );
+
+vehicles=[
+...defaultVehicles,
+...userVehicles
+];
+
+const modal=document.querySelector(".modal");
+
+modal.innerHTML=`
+
+<div class="modalBox">
+
+<div class="success">
+
+<div class="successIcon">✓</div>
+
+<div class="eyebrow">LISTING PUBLISHED</div>
+
+<h2>Your car is live</h2>
+
+<p>
+Your ${year} ${make} ${model} has been added to the CarHub Africa catalogue.
+</p>
+
+<button
+class="confirm"
+style="margin-top:20px;width:100%"
+onclick="closeSelling();document.getElementById('cars').scrollIntoView({behavior:'smooth'});render();">
+View my listing
+</button>
+
+</div>
+
+</div>
+`;
+
+render();
 
 }
 
