@@ -152,16 +152,11 @@ height:520px;
 z-index:0;
 }
 
-.heroMapShape{
-position:absolute;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:90px;
-filter:drop-shadow(0 0 30px rgba(232,185,78,.3));
-opacity:.22;
-}
+.africaSilhouette{position:absolute;inset:40px 40px 10px auto;width:430px;height:430px;overflow:visible;opacity:.22;filter:drop-shadow(0 0 28px rgba(145,245,201,.18));}
+.heroAfricaBack{opacity:.72}
+.heroAfricaLine{opacity:.55}
+.heroMap::after{content:"AFRICA";position:absolute;right:70px;bottom:58px;font-size:9px;letter-spacing:4px;font-weight:900;color:rgba(145,245,201,.38);}
+
 
 .heroMapFlags{
 position:absolute;
@@ -502,31 +497,13 @@ font-size:13px;
 line-height:1.65;
 }
 
-.africaMapFlagCloud{
-position:absolute;
-right:15px;
-top:30px;
-width:540px;
-height:290px;
-display:grid;
-grid-template-columns:repeat(9,1fr);
-gap:5px;
-transform:rotate(-4deg);
-mask-image:radial-gradient(ellipse at center,black 35%,transparent 75%);
-opacity:.82;
-}
-
-.africaMapFlagCloud .flag{
-height:35px;
-font-size:25px;
-transition:.2s;
-}
-
-.africaMapFlagCloud .flag:hover{
-transform:scale(1.3);
-filter:drop-shadow(0 0 8px rgba(145,245,201,.7));
-z-index:4;
-}
+.africaMapVisual{position:absolute;right:12px;top:18px;width:520px;height:320px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 25px 45px rgba(0,0,0,.28));}
+.africaMapSvg{width:320px;height:350px;overflow:visible;filter:drop-shadow(0 0 24px rgba(145,245,201,.13));}
+.mapHalo{opacity:.75}
+.mapOutline{opacity:.7}
+.africaFlagText{font-size:11px;dominant-baseline:middle;text-anchor:middle;paint-order:stroke;stroke:rgba(3,7,5,.45);stroke-width:.8px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45));transition:transform .2s;cursor:pointer;}
+.africaFlagText:hover{font-size:15px;filter:drop-shadow(0 0 6px rgba(145,245,201,.9));}
+.mapBadge{position:absolute;bottom:8px;right:20px;padding:7px 10px;border-radius:999px;border:1px solid rgba(145,245,201,.18);background:rgba(3,7,5,.62);backdrop-filter:blur(15px);font-size:8px;font-weight:900;letter-spacing:1.6px;color:#91f5c9;}
 
 /* DISTRESS */
 
@@ -592,7 +569,16 @@ font-size:11px;
 font-weight:950;
 }
 
+.distressScene{position:absolute;inset:78px 0 0;pointer-events:none;z-index:0;overflow:hidden;opacity:.82;}
+.distressCar3d{position:absolute;width:190px;filter:drop-shadow(0 25px 16px rgba(0,0,0,.6));animation:distressFloat 5.5s ease-in-out infinite;transform-style:preserve-3d;}
+.distressCar3d svg{width:100%;height:auto;transform:perspective(500px) rotateX(12deg) rotateY(-16deg) rotateZ(-4deg);}
+.car3dLabel{position:absolute;top:-5px;left:50%;transform:translateX(-50%) rotate(-5deg);padding:5px 8px;border-radius:999px;background:#ff625f;color:#fff;border:1px solid rgba(255,255,255,.35);font-size:7px;font-weight:950;letter-spacing:1.5px;box-shadow:0 5px 15px rgba(255,98,95,.28);z-index:3;}
+.distressCarOne{left:4%;top:45px;transform:rotate(-7deg) scale(.82);}
+.distressCarTwo{right:5%;top:18px;transform:rotate(7deg) scale(.72);animation-delay:-1.8s;}
+.distressCarThree{right:36%;top:135px;transform:rotate(-3deg) scale(.58);animation-delay:-3.2s;opacity:.55;}
+@keyframes distressFloat{0%,100%{translate:0 0;}50%{translate:0 -15px;}}
 .distressGrid{
+position:relative;z-index:2;
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:12px;
@@ -957,10 +943,7 @@ height:430px;
 right:-100px;
 }
 
-.africaMapFlagCloud{
-right:-100px;
-opacity:.65;
-}
+.africaMapVisual{right:-80px;opacity:.72;transform:scale(.88);transform-origin:center right;}
 
 }
 
@@ -1069,17 +1052,15 @@ padding:28px 22px;
 align-items:flex-start;
 }
 
-.africaMapFlagCloud{
-width:400px;
-height:260px;
-right:-125px;
-top:100px;
-grid-template-columns:repeat(7,1fr);
-}
+.africaMapVisual{width:420px;height:280px;right:-105px;top:105px;transform:scale(.88);transform-origin:center right;}
+.africaMapSvg{width:270px;height:300px;}
+.mapBadge{right:5px;bottom:0;font-size:7px;}
 
-.distressBox{
-padding:22px 17px;
-}
+.distressBox{padding:22px 17px;}
+.distressScene{opacity:.25;inset:105px 0 0;}
+.distressCarOne{left:-48px;top:70px;}
+.distressCarTwo{right:-55px;top:45px;}
+.distressCarThree{display:none;}
 
 .distressTop{
 align-items:flex-start;
@@ -1180,12 +1161,20 @@ Sell a car
 
 <div class="heroBox">
 
-<div class="heroMap">
-
-<div class="heroMapShape">🌍</div>
-
-<div class="heroMapFlags" id="heroFlags"></div>
-
+<div class="heroMap" aria-hidden="true">
+  <svg class="africaSilhouette" viewBox="0 0 220 240" role="img">
+    <defs>
+      <linearGradient id="heroAfricaGradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#91f5c9"/>
+        <stop offset="55%" stop-color="#2f9f72"/>
+        <stop offset="100%" stop-color="#07140e"/>
+      </linearGradient>
+      <filter id="heroAfricaGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <path class="heroAfricaBack" d="M105 7 C91 11 79 21 73 33 C66 46 67 56 58 66 C49 77 39 87 36 101 C33 116 39 127 46 139 C52 149 59 155 61 169 C63 184 68 198 77 211 C85 222 91 235 101 239 C108 241 111 231 113 222 C116 209 125 199 132 189 C141 177 151 169 159 156 C168 142 176 130 179 115 C181 103 175 95 169 87 C162 77 162 65 158 53 C154 40 146 29 137 20 C128 11 117 5 105 7Z M159 88 C168 83 178 84 185 90 C191 95 195 103 190 108 C184 113 175 111 170 106 C165 101 159 96 159 88Z" fill="url(#heroAfricaGradient)" filter="url(#heroAfricaGlow)"/>
+    <path class="heroAfricaLine" d="M105 7 C91 11 79 21 73 33 C66 46 67 56 58 66 C49 77 39 87 36 101 C33 116 39 127 46 139 C52 149 59 155 61 169 C63 184 68 198 77 211 C85 222 91 235 101 239 C108 241 111 231 113 222 C116 209 125 199 132 189 C141 177 151 169 159 156 C168 142 176 130 179 115 C181 103 175 95 169 87 C162 77 162 65 158 53 C154 40 146 29 137 20 C128 11 117 5 105 7Z M159 88 C168 83 178 84 185 90 C191 95 195 103 190 108 C184 113 175 111 170 106 C165 101 159 96 159 88Z" fill="none" stroke="rgba(145,245,201,.65)" stroke-width="1.5"/>
+  </svg>
+  <div class="heroMapFlags" id="heroFlags"></div>
 </div>
 
 <div class="heroContent">
@@ -1349,7 +1338,25 @@ Reset
 
 <div class="africaBox">
 
-<div class="africaMapFlagCloud" id="africaFlags"></div>
+<div class="africaMapVisual" aria-label="Map of Africa with African country flags">
+  <svg class="africaMapSvg" viewBox="0 0 220 240" role="img">
+    <defs>
+      <linearGradient id="africaMainGradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#91f5c9"/>
+        <stop offset="45%" stop-color="#3db987"/>
+        <stop offset="100%" stop-color="#0b2419"/>
+      </linearGradient>
+      <clipPath id="africaClip">
+        <path d="M105 7 C91 11 79 21 73 33 C66 46 67 56 58 66 C49 77 39 87 36 101 C33 116 39 127 46 139 C52 149 59 155 61 169 C63 184 68 198 77 211 C85 222 91 235 101 239 C108 241 111 231 113 222 C116 209 125 199 132 189 C141 177 151 169 159 156 C168 142 176 130 179 115 C181 103 175 95 169 87 C162 77 162 65 158 53 C154 40 146 29 137 20 C128 11 117 5 105 7Z M159 88 C168 83 178 84 185 90 C191 95 195 103 190 108 C184 113 175 111 170 106 C165 101 159 96 159 88Z"/>
+      </clipPath>
+      <filter id="mapGlow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <path class="mapHalo" d="M105 7 C91 11 79 21 73 33 C66 46 67 56 58 66 C49 77 39 87 36 101 C33 116 39 127 46 139 C52 149 59 155 61 169 C63 184 68 198 77 211 C85 222 91 235 101 239 C108 241 111 231 113 222 C116 209 125 199 132 189 C141 177 151 169 159 156 C168 142 176 130 179 115 C181 103 175 95 169 87 C162 77 162 65 158 53 C154 40 146 29 137 20 C128 11 117 5 105 7Z M159 88 C168 83 178 84 185 90 C191 95 195 103 190 108 C184 113 175 111 170 106 C165 101 159 96 159 88Z" fill="url(#africaMainGradient)" opacity=".18" filter="url(#mapGlow)"/>
+    <g id="africaFlagSvg" clip-path="url(#africaClip)"></g>
+    <path class="mapOutline" d="M105 7 C91 11 79 21 73 33 C66 46 67 56 58 66 C49 77 39 87 36 101 C33 116 39 127 46 139 C52 149 59 155 61 169 C63 184 68 198 77 211 C85 222 91 235 101 239 C108 241 111 231 113 222 C116 209 125 199 132 189 C141 177 151 169 159 156 C168 142 176 130 179 115 C181 103 175 95 169 87 C162 77 162 65 158 53 C154 40 146 29 137 20 C128 11 117 5 105 7Z M159 88 C168 83 178 84 185 90 C191 95 195 103 190 108 C184 113 175 111 170 106 C165 101 159 96 159 88Z" fill="none" stroke="rgba(145,245,201,.75)" stroke-width="1.3"/>
+  </svg>
+  <div class="mapBadge">54 FLAGS • ONE CONTINENT</div>
+</div>
 
 <div class="africaText">
 
@@ -1419,6 +1426,29 @@ onclick="openDistress()">
 
 </div>
 
+<div class="distressScene" aria-hidden="true">
+  <div class="distressCar3d distressCarOne">
+    <div class="car3dLabel">DISTRESS</div>
+    <svg viewBox="0 0 260 130">
+      <defs><linearGradient id="dc1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff817b"/><stop offset=".55" stop-color="#b72d2d"/><stop offset="1" stop-color="#42100f"/></linearGradient></defs>
+      <ellipse cx="130" cy="111" rx="91" ry="10" fill="rgba(0,0,0,.55)"/>
+      <path d="M42 92 L56 66 Q62 56 78 52 L103 30 Q108 25 119 25 L165 25 Q176 26 184 34 L207 54 Q219 58 224 72 L230 92 Q232 101 222 104 L48 104 Q36 102 42 92Z" fill="url(#dc1)" stroke="#ffb0a7" stroke-width="2"/>
+      <path d="M104 31 L86 52 L170 52 L162 31Z" fill="#07110d" stroke="rgba(255,255,255,.45)"/>
+      <path d="M173 35 L205 56 L174 52Z" fill="#0a1712" stroke="rgba(255,255,255,.35)"/>
+      <circle cx="78" cy="101" r="18" fill="#090b0a" stroke="#777" stroke-width="4"/><circle cx="78" cy="101" r="7" fill="#ddd"/>
+      <circle cx="202" cy="101" r="18" fill="#090b0a" stroke="#777" stroke-width="4"/><circle cx="202" cy="101" r="7" fill="#ddd"/>
+      <rect x="43" y="67" width="22" height="9" rx="4" fill="#fff" opacity=".85"/><rect x="211" y="69" width="12" height="10" rx="4" fill="#ffdf87"/>
+    </svg>
+  </div>
+  <div class="distressCar3d distressCarTwo">
+    <div class="car3dLabel">DISTRESS</div>
+    <svg viewBox="0 0 260 130"><defs><linearGradient id="dc2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#91f5c9"/><stop offset=".5" stop-color="#267f5e"/><stop offset="1" stop-color="#07130e"/></linearGradient></defs><ellipse cx="130" cy="111" rx="91" ry="10" fill="rgba(0,0,0,.55)"/><path d="M42 92 L56 66 Q62 56 78 52 L103 30 Q108 25 119 25 L165 25 Q176 26 184 34 L207 54 Q219 58 224 72 L230 92 Q232 101 222 104 L48 104 Q36 102 42 92Z" fill="url(#dc2)" stroke="#b8ffe3" stroke-width="2"/><path d="M104 31 L86 52 L170 52 L162 31Z" fill="#07110d" stroke="rgba(255,255,255,.45)"/><path d="M173 35 L205 56 L174 52Z" fill="#0a1712" stroke="rgba(255,255,255,.35)"/><circle cx="78" cy="101" r="18" fill="#090b0a" stroke="#777" stroke-width="4"/><circle cx="78" cy="101" r="7" fill="#ddd"/><circle cx="202" cy="101" r="18" fill="#090b0a" stroke="#777" stroke-width="4"/><circle cx="202" cy="101" r="7" fill="#ddd"/><rect x="43" y="67" width="22" height="9" rx="4" fill="#fff" opacity=".85"/><rect x="211" y="69" width="12" height="10" rx="4" fill="#ffdf87"/></svg>
+  </div>
+  <div class="distressCar3d distressCarThree">
+    <div class="car3dLabel">DISTRESS</div>
+    <svg viewBox="0 0 260 130"><defs><linearGradient id="dc3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9c15b"/><stop offset=".5" stop-color="#8f6d22"/><stop offset="1" stop-color="#201909"/></linearGradient></defs><ellipse cx="130" cy="111" rx="91" ry="10" fill="rgba(0,0,0,.55)"/><path d="M42 92 L56 66 Q62 56 78 52 L103 30 Q108 25 119 25 L165 25 Q176 26 184 34 L207 54 Q219 58 224 72 L230 92 Q232 101 222 104 L48 104 Q36 102 42 92Z" fill="url(#dc3)" stroke="#ffe9a2" stroke-width="2"/><path d="M104 31 L86 52 L170 52 L162 31Z" fill="#07110d" stroke="rgba(255,255,255,.45)"/><path d="M173 35 L205 56 L174 52Z" fill="#0a1712" stroke="rgba(255,255,255,.35)"/><circle cx="78" cy="101" r="18" fill="#090b0a" stroke="#777" stroke-width="4"/><circle cx="78" cy="101" r="7" fill="#ddd"/><circle cx="202" cy="101" r="18" fill="#090b0a" stroke="#777" stroke-width="4"/><circle cx="202" cy="101" r="7" fill="#ddd"/><rect x="43" y="67" width="22" height="9" rx="4" fill="#fff" opacity=".85"/><rect x="211" y="69" width="12" height="10" rx="4" fill="#ffdf87"/></svg>
+  </div>
+</div>
 <div class="distressGrid" id="distressList"></div>
 
 </div>
@@ -1817,23 +1847,35 @@ const africanCountries=[
 /* BUILD FLAG MAPS */
 
 function buildFlags(){
-
-const hero=document.getElementById("heroFlags");
-const africa=document.getElementById("africaFlags");
-
-africanCountries.forEach(country=>{
-
-const flag=document.createElement("div");
-
-flag.className="flag";
-flag.textContent=country[1];
-flag.title=country[0];
-
-hero.appendChild(flag.cloneNode(true));
-africa.appendChild(flag);
-
-});
-
+  const hero=document.getElementById("heroFlags");
+  const map=document.getElementById("africaFlagSvg");
+  if(hero){
+    africanCountries.forEach(country=>{
+      const flag=document.createElement("div");
+      flag.className="flag";
+      flag.textContent=country[1];
+      flag.title=country[0];
+      hero.appendChild(flag);
+    });
+  }
+  if(map){
+    const cols=8, rows=Math.ceil(africanCountries.length/cols);
+    africanCountries.forEach((country,i)=>{
+      const col=i%cols, row=Math.floor(i/cols);
+      const x=50 + col*22.5;
+      const y=35 + row*25.2;
+      const text=document.createElementNS("http://www.w3.org/2000/svg","text");
+      text.setAttribute("x",x);
+      text.setAttribute("y",y);
+      text.setAttribute("class","africaFlagText");
+      text.setAttribute("aria-label",country[0]);
+      text.textContent=country[1];
+      const title=document.createElementNS("http://www.w3.org/2000/svg","title");
+      title.textContent=country[0];
+      text.appendChild(title);
+      map.appendChild(text);
+    });
+  }
 }
 
 buildFlags();
